@@ -5,4 +5,4 @@
 - library:  第三方封装好的模块
 - logs: 日志文件
 - report:   测试报告
-- testcases:    测试用例模块
+- testcases:    测试用例模块的文件夹
