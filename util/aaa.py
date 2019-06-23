@@ -73,30 +73,3 @@ if __name__ == '__main__':
         test(case)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    # # 选取请求的电话号为已注册的测试用例数据
-    # if "#exists_phone#" in case.request_data:
-    #     # 从数据库获取第一条号码，给用例参数
-    #     mobile_phone = db.find_one("SELECT MobilePhone FROM member LIMIT 1")[0]
-    #     # 用从数据库获取的号码替换掉请求数据中的标记#exists_phone
-    #     case.request_data.replace("#exists_phone#", mobile_phone)
-    #
-    # if "#login_phone#" in case.request_data:
-    #     # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
-    #     case.request_data.replace("#login_phone#", conf.get("test_data", "mobile_phone"))
-    #
-    # if "#pwd#" in case.request_data:
-    #     # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-    #     case.request_data.replace("#pwd#", conf.get("test_data", "pwd"))
-
