@@ -72,7 +72,7 @@ if __name__ == '__main__':
     for case in cases:
         test(case)
 
-a =10
+a =100
 
 
 

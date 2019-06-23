@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08082dbb-45a7-478a-a1d5-11ff6e587f6e" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/util/aaa.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/aaa.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/report/20190621181605_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621182021_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621182615_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621185048_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621192157_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621192324_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621194232_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/20190621194416_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/aaa.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/aaa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/bbb.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/mysql_01.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/mysql_01.py" afterDir="false" />
+>>>>>>> 版本0.0.7
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,8 +66,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/util/aaa.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="554">
               <caret line="75" selection-start-line="75" selection-end-line="75" />
+=======
+            <state relative-caret-position="520">
+              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+>>>>>>> 版本0.0.7
               <folding>
                 <element signature="e#170#185#0" expanded="true" />
               </folding>
@@ -62,6 +81,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+=======
+        <entry file="file://$PROJECT_DIR$/util/mysql_01.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="48" column="6" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+>>>>>>> 版本0.0.7
         <entry file="file://$PROJECT_DIR$/testcases/test_withdraw.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1734">
@@ -98,6 +129,10 @@
     <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
+=======
+    <option name="RESET_MODE" value="MIXED" />
+>>>>>>> 版本0.0.7
     <option name="PUSH_TAGS">
       <GitPushTagMode />
     </option>
@@ -111,7 +146,10 @@
         <option value="$PROJECT_DIR$/util/http_request.py" />
         <option value="$PROJECT_DIR$/common/http_request.py" />
         <option value="$PROJECT_DIR$/util/execute_mysql.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/util/mysql_01.py" />
+=======
+>>>>>>> 版本0.0.7
         <option value="$PROJECT_DIR$/conf/config.ini" />
         <option value="$PROJECT_DIR$/run_suite.py" />
         <option value="$PROJECT_DIR$/library/ddt.py" />
@@ -128,6 +166,10 @@
         <option value="$PROJECT_DIR$/conf/config_test.ini" />
         <option value="$PROJECT_DIR$/testcases/test_register.py" />
         <option value="$PROJECT_DIR$/util/bbb.py" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/util/mysql_01.py" />
+>>>>>>> 版本0.0.7
         <option value="$PROJECT_DIR$/util/aaa.py" />
       </list>
     </option>
@@ -361,7 +403,32 @@
       <option name="project" value="LOCAL" />
       <updated>1561250844861</updated>
     </task>
+<<<<<<< HEAD
     <option name="localTasksCounter" value="4" />
+=======
+    <task id="LOCAL-00004" summary="版本0.0.3">
+      <created>1561252310084</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1561252310084</updated>
+    </task>
+    <task id="LOCAL-00005" summary="版本0.0.5">
+      <created>1561252467725</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1561252467725</updated>
+    </task>
+    <task id="LOCAL-00006" summary="版本0.0.6">
+      <created>1561252531539</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1561252531539</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+>>>>>>> 版本0.0.7
     <servers />
   </component>
   <component name="TestHistory">
@@ -380,8 +447,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+<<<<<<< HEAD
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13738441" />
+=======
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13738441" />
+>>>>>>> 版本0.0.7
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -391,7 +464,11 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" order="7" />
+=======
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3286119" />
+>>>>>>> 版本0.0.7
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.2956153" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
@@ -400,10 +477,50 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+>>>>>>> 版本0.0.7
   <component name="VcsManagerConfiguration">
     <MESSAGE value="版本0.0.1" />
     <MESSAGE value="版本0.0.2" />
     <MESSAGE value="版本0.0.3" />
+<<<<<<< HEAD
     <option name="LAST_COMMIT_MESSAGE" value="版本0.0.3" />
   </component>
   <component name="editorHistoryManager">
@@ -417,6 +534,13 @@
         </state>
       </provider>
     </entry>
+=======
+    <MESSAGE value="版本0.0.5" />
+    <MESSAGE value="版本0.0.6" />
+    <option name="LAST_COMMIT_MESSAGE" value="版本0.0.6" />
+  </component>
+  <component name="editorHistoryManager">
+>>>>>>> 版本0.0.7
     <entry file="file://$PROJECT_DIR$/report/20190619090428_report.html" />
     <entry file="file://$PROJECT_DIR$/report/20190620000034_report.html" />
     <entry file="file://$PROJECT_DIR$/report/20190618215850_report.html" />
@@ -578,10 +702,24 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/util/aaa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="554">
           <caret line="75" selection-start-line="75" selection-end-line="75" />
+=======
+    <entry file="file://$PROJECT_DIR$/util/mysql_01.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="48" column="6" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/aaa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+>>>>>>> 版本0.0.7
           <folding>
             <element signature="e#170#185#0" expanded="true" />
           </folding>
