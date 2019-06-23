@@ -46,5 +46,5 @@ print(data[0])
 # demo
 # cur.execute(sql)
 # con.commit()
-a = 100
+a = 10
 
