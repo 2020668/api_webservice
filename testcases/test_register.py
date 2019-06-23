@@ -118,8 +118,3 @@ class RegisterTestCase(unittest.TestCase):
 
         my_log.info("注册接口测试执行完毕......")
         cls.request.close()
-
-
-# if __name__ == '__main__':
-#     a = RegisterTestCase()
-#     a.test_register(case=case)
