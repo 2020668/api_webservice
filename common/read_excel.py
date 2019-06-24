@@ -79,7 +79,7 @@ class ReadExcel(object):
             # 将该条数据放入cases中
             cases.append(case_obj)
             # 关闭工作簿
-            self.close()
+        self.close()
         return cases
 
     def read_column_data(self, read_column):
