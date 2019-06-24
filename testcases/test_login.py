@@ -106,9 +106,7 @@ class LoginTestCase(unittest.TestCase):
             result = 'PASS'
             my_log.debug("预期结果：%s, 实际结果：%s, 测试通过" % (eval(case.expected_data), res))
         finally:
-            my_log.info("开始向excel的login写入数据。。。。。。")
             self.wb.write_data(row=self.row, column=9, msg=result)
-            my_log.info("向excel的login写入数据完成。。。。。。")
 
     @classmethod
     def tearDownClass(cls):

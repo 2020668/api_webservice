@@ -13422,3 +13422,193 @@ AssertionError: {'status': 0, 'code': '20119', 'msg': '余额不足, 请修改�
 ?           ^^^             ^ ^^             ^
 
 2019-06-24 08:50:08,291 - [test_withdraw.py -->line:133] - INFO : 取现接口测试执行完毕......
+2019-06-24 10:21:55,243 - [test_login.py -->line:52] - INFO : 准备开始执行登录接口的测试......
+2019-06-24 10:21:57,090 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '15566778999', 'pwd': 'abc123456'}
+2019-06-24 10:21:57,229 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '登录成功'}, 实际结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '登录成功'}, 测试通过
+2019-06-24 10:21:57,668 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '150 71369970', 'pwd': '123456'}
+2019-06-24 10:21:57,887 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:21:58,374 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': ' ', 'pwd': 'abc123'}
+2019-06-24 10:21:58,410 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}, 实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}, 测试通过
+2019-06-24 10:21:58,819 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '13351834060', 'pwd': 'abc123'}
+2019-06-24 10:21:58,942 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:21:59,439 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': 'a1507133990', 'pwd': 'abc123'}
+2019-06-24 10:21:59,536 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:21:59,866 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '18825046772', 'pwd': ' '}
+2019-06-24 10:21:59,905 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '密码不能为空'}, 实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '密码不能为空'}, 测试通过
+2019-06-24 10:22:00,471 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '18825046772', 'pwd': '12345'}
+2019-06-24 10:22:00,612 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:22:01,191 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '18825046772', 'pwd': '1234567890123456789'}
+2019-06-24 10:22:01,307 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:22:02,039 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '15566778999', 'pwd': 'ABC123456'}
+2019-06-24 10:22:05,139 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:22:05,652 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '15566778999', 'pwd': 'ac1234567'}
+2019-06-24 10:22:05,749 - [test_login.py -->line:107] - DEBUG : 预期结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 实际结果：{'status': 0, 'code': '20111', 'data': None, 'msg': '用户名或密码错误'}, 测试通过
+2019-06-24 10:22:06,376 - [test_login.py -->line:114] - INFO : 登录接口测试执行完毕......
+2019-06-24 10:22:06,379 - [test_recharge.py -->line:52] - INFO : 准备开始执行充值接口的测试......
+2019-06-24 10:22:06,497 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '15566778999', 'pwd': 'abc123456'}
+2019-06-24 10:22:06,911 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '登录成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '登录成功'}, 测试通过
+2019-06-24 10:22:07,537 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 500000}
+2019-06-24 10:22:08,197 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '充值成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '充值成功'}, 测试通过
+2019-06-24 10:22:09,590 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 200000.5}
+2019-06-24 10:22:10,612 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '充值成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '充值成功'}, 测试通过
+2019-06-24 10:22:11,195 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 0.01}
+2019-06-24 10:22:11,610 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '充值成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '充值成功'}, 测试通过
+2019-06-24 10:22:12,230 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '', 'amount': 100.99}
+2019-06-24 10:22:12,260 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20103', 'msg': '手机号不能为空'}, 实际结果：{'status': 0, 'code': '20103', 'msg': '手机号不能为空'}, 测试通过
+2019-06-24 10:22:12,543 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': None}
+2019-06-24 10:22:12,574 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20115', 'msg': '请输入金额'}, 实际结果：{'status': 0, 'code': '20115', 'msg': '请输入金额'}, 测试通过
+2019-06-24 10:22:13,115 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15071360000', 'amount': 1000}
+2019-06-24 10:22:13,220 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20104', 'msg': '此手机号对应的会员不存在'}, 实际结果：{'status': 0, 'code': '20104', 'msg': '此手机号对应的会员不存在'}, 测试通过
+2019-06-24 10:22:13,738 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': 'a5071369971', 'amount': 5000}
+2019-06-24 10:22:14,776 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:15,490 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '10071369971', 'amount': 5000}
+2019-06-24 10:22:15,530 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:16,021 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '1507136997', 'amount': 5000}
+2019-06-24 10:22:16,055 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:16,361 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '150713699711', 'amount': 5000}
+2019-06-24 10:22:16,392 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:16,961 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 2000.999}
+2019-06-24 10:22:17,245 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20116', 'msg': '输入金额的金额小数不能超过两位'}, 实际结果：{'status': 0, 'code': '20116', 'msg': '输入金额的金额小数不能超过两位'}, 测试通过
+2019-06-24 10:22:18,006 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 0}
+2019-06-24 10:22:18,280 - [test_recharge.py -->line:119] - ERROR : {'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'} != {'status': 1, 'code': '10001', 'msg': '充值成功'}
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0}
++ {'code': '10001', 'msg': '充值成功', 'status': 1}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\qcd_api_test_00\testcases\test_recharge.py", line 106, in test_recharge
+    self.assertEqual(eval(case.expected_data), res)
+  File "C:\Python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\Python37\lib\unittest\case.py", line 1138, in assertDictEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\Python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: {'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'} != {'status': 1, 'code': '10001', 'msg': '充值成功'}
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0}
++ {'code': '10001', 'msg': '充值成功', 'status': 1}
+2019-06-24 10:22:19,044 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': -1}
+2019-06-24 10:22:19,081 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 实际结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 测试通过
+2019-06-24 10:22:19,607 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 500000.01}
+2019-06-24 10:22:19,688 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 实际结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 测试通过
+2019-06-24 10:22:20,287 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/recharge， 请求参数：{'mobilephone': '15566778999', 'amount': 500000.01}
+2019-06-24 10:22:20,513 - [test_recharge.py -->line:123] - DEBUG : 预期结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 实际结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 测试通过
+2019-06-24 10:22:21,117 - [test_recharge.py -->line:131] - INFO : 充值接口测试执行完毕......
+2019-06-24 10:22:21,119 - [test_register.py -->line:51] - INFO : 准备开始执行注册接口的测试......
+2019-06-24 10:22:21,349 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '13311766217', 'pwd': '123456', 'regname': 'baozi'}
+2019-06-24 10:22:21,541 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}, 实际结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}, 测试通过
+2019-06-24 10:22:22,299 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '13323320996', 'pwd': 'abc123456789012300', 'regname': '张三'}
+2019-06-24 10:22:24,995 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}, 实际结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}, 测试通过
+2019-06-24 10:22:25,852 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '13386444531', 'pwd': 'abc123456789012300', 'regname': ' '}
+2019-06-24 10:22:25,984 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}, 实际结果：{'status': 1, 'code': '10001', 'data': None, 'msg': '注册成功'}, 测试通过
+2019-06-24 10:22:26,345 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '', 'pwd': 'abc123', 'regname': 'baozi'}
+2019-06-24 10:22:26,411 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}, 实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '手机号不能为空'}, 测试通过
+2019-06-24 10:22:27,256 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '15071369972', 'pwd': '', 'regname': 'baozi'}
+2019-06-24 10:22:27,521 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '密码不能为空'}, 实际结果：{'status': 0, 'code': '20103', 'data': None, 'msg': '密码不能为空'}, 测试通过
+2019-06-24 10:22:28,113 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '15071369972', 'pwd': 'ab123', 'regname': 'baozi'}
+2019-06-24 10:22:28,149 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20108', 'data': None, 'msg': '密码长度必须为6~18'}, 实际结果：{'status': 0, 'code': '20108', 'data': None, 'msg': '密码长度必须为6~18'}, 测试通过
+2019-06-24 10:22:28,590 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '15071369972', 'pwd': 'abc1234567890123001', 'regname': 'baozi'}
+2019-06-24 10:22:28,622 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20108', 'data': None, 'msg': '密码长度必须为6~18'}, 实际结果：{'status': 0, 'code': '20108', 'data': None, 'msg': '密码长度必须为6~18'}, 测试通过
+2019-06-24 10:22:29,074 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': 'a5071369972', 'pwd': 'abc123', 'regname': 'baozi'}
+2019-06-24 10:22:29,109 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:29,853 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '150 71369971', 'pwd': 'abc123456789012300', 'regname': '张三'}
+2019-06-24 10:22:29,891 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:30,555 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '10071369972', 'pwd': 'abc123', 'regname': 'baozi'}
+2019-06-24 10:22:30,588 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:31,056 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '1507136997', 'pwd': '123456', 'regname': 'baozi'}
+2019-06-24 10:22:31,096 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:31,401 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '150713699701', 'pwd': '123456', 'regname': 'baozi'}
+2019-06-24 10:22:31,446 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'data': None, 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:31,984 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/register， 请求参数：{'mobilephone': '18825046772', 'pwd': '123456', 'regname': '王五'}
+2019-06-24 10:22:32,074 - [test_register.py -->line:112] - DEBUG : 预期结果：{'status': 0, 'code': '20110', 'data': None, 'msg': '手机号码已被注册'}, 实际结果：{'status': 0, 'code': '20110', 'data': None, 'msg': '手机号码已被注册'}, 测试通过
+2019-06-24 10:22:32,605 - [test_register.py -->line:119] - INFO : 注册接口测试执行完毕......
+2019-06-24 10:22:32,605 - [test_withdraw.py -->line:53] - INFO : 准备开始执行取现接口的测试......
+2019-06-24 10:22:33,869 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/login， 请求参数：{'mobilephone': '15566778999', 'pwd': 'abc123456'}
+2019-06-24 10:22:34,425 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '登录成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '登录成功'}, 测试通过
+2019-06-24 10:22:34,863 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 500000}
+2019-06-24 10:22:39,048 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '取现成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '取现成功'}, 测试通过
+2019-06-24 10:22:40,183 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 20000.8}
+2019-06-24 10:22:40,754 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '取现成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '取现成功'}, 测试通过
+2019-06-24 10:22:41,889 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 0.01}
+2019-06-24 10:22:42,343 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 1, 'code': '10001', 'msg': '取现成功'}, 实际结果：{'status': 1, 'code': '10001', 'msg': '取现成功'}, 测试通过
+2019-06-24 10:22:42,852 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '', 'amount': 100.99}
+2019-06-24 10:22:42,888 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20103', 'msg': '手机号不能为空'}, 实际结果：{'status': 0, 'code': '20103', 'msg': '手机号不能为空'}, 测试通过
+2019-06-24 10:22:43,463 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': None}
+2019-06-24 10:22:43,980 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20115', 'msg': '请输入金额'}, 实际结果：{'status': 0, 'code': '20115', 'msg': '请输入金额'}, 测试通过
+2019-06-24 10:22:44,455 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '13331177517', 'amount': 1000}
+2019-06-24 10:22:44,576 - [test_withdraw.py -->line:121] - ERROR : {'status': 0, 'code': '20104', 'msg': '此手机号对应的会员不存在'} != {'status': 1, 'code': '20104', 'msg': '此手机号对应的会员不存在'}
+- {'code': '20104', 'msg': '此手机号对应的会员不存在', 'status': 0}
+?                                                    ^
+
++ {'code': '20104', 'msg': '此手机号对应的会员不存在', 'status': 1}
+?                                                    ^
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\qcd_api_test_00\testcases\test_withdraw.py", line 107, in test_withdraw
+    self.assertEqual(eval(case.expected_data), res)
+  File "C:\Python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\Python37\lib\unittest\case.py", line 1138, in assertDictEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\Python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: {'status': 0, 'code': '20104', 'msg': '此手机号对应的会员不存在'} != {'status': 1, 'code': '20104', 'msg': '此手机号对应的会员不存在'}
+- {'code': '20104', 'msg': '此手机号对应的会员不存在', 'status': 0}
+?                                                    ^
+
++ {'code': '20104', 'msg': '此手机号对应的会员不存在', 'status': 1}
+?                                                    ^
+
+2019-06-24 10:22:45,298 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': 'a5071369971', 'amount': 5000}
+2019-06-24 10:22:45,338 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:45,986 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '10071369971', 'amount': 5000}
+2019-06-24 10:22:46,041 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:46,601 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '1507136997', 'amount': 5000}
+2019-06-24 10:22:46,635 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:47,442 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '150713699711', 'amount': 5000}
+2019-06-24 10:22:47,481 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 实际结果：{'status': 0, 'code': '20109', 'msg': '手机号码格式不正确'}, 测试通过
+2019-06-24 10:22:48,338 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 2000.999}
+2019-06-24 10:22:48,377 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20116', 'msg': '输入金额的金额小数不能超过两位'}, 实际结果：{'status': 0, 'code': '20116', 'msg': '输入金额的金额小数不能超过两位'}, 测试通过
+2019-06-24 10:22:49,071 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 0}
+2019-06-24 10:22:49,778 - [test_withdraw.py -->line:121] - ERROR : {'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'} != {'status': 1, 'code': '10001', 'msg': '取现成功'}
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0}
++ {'code': '10001', 'msg': '取现成功', 'status': 1}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\qcd_api_test_00\testcases\test_withdraw.py", line 107, in test_withdraw
+    self.assertEqual(eval(case.expected_data), res)
+  File "C:\Python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\Python37\lib\unittest\case.py", line 1138, in assertDictEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\Python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: {'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'} != {'status': 1, 'code': '10001', 'msg': '取现成功'}
+- {'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额', 'status': 0}
++ {'code': '10001', 'msg': '取现成功', 'status': 1}
+2019-06-24 10:22:50,414 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': -1}
+2019-06-24 10:22:50,537 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 实际结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 测试通过
+2019-06-24 10:22:50,905 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 500000.01}
+2019-06-24 10:22:50,990 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 实际结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 测试通过
+2019-06-24 10:22:51,338 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 500000.01}
+2019-06-24 10:22:57,139 - [test_withdraw.py -->line:125] - DEBUG : 预期结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 实际结果：{'status': 0, 'code': '20117', 'msg': '请输入范围在0到50万之间的正数金额'}, 测试通过
+2019-06-24 10:22:57,414 - [http_request.py -->line:62] - INFO : 正在发送请求，请求地址：http://test.lemonban.com/futureloan/mvc/api/member/withdraw， 请求参数：{'mobilephone': '15566778999', 'amount': 500000}
+2019-06-24 10:22:58,752 - [test_withdraw.py -->line:121] - ERROR : {'status': 0, 'code': '20119', 'msg': '余额不足, 请修改提现额度'} != {'status': 1, 'code': '10001', 'msg': '取现成功'}
+- {'code': '20119', 'msg': '余额不足, 请修改提现额度', 'status': 0}
+?           ^  --           ^^^^^^^^^^ ^^             ^
+
++ {'code': '10001', 'msg': '取现成功', 'status': 1}
+?           ^^^             ^ ^^             ^
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\qcd_api_test_00\testcases\test_withdraw.py", line 107, in test_withdraw
+    self.assertEqual(eval(case.expected_data), res)
+  File "C:\Python37\lib\unittest\case.py", line 839, in assertEqual
+    assertion_func(first, second, msg=msg)
+  File "C:\Python37\lib\unittest\case.py", line 1138, in assertDictEqual
+    self.fail(self._formatMessage(msg, standardMsg))
+  File "C:\Python37\lib\unittest\case.py", line 680, in fail
+    raise self.failureException(msg)
+AssertionError: {'status': 0, 'code': '20119', 'msg': '余额不足, 请修改提现额度'} != {'status': 1, 'code': '10001', 'msg': '取现成功'}
+- {'code': '20119', 'msg': '余额不足, 请修改提现额度', 'status': 0}
+?           ^  --           ^^^^^^^^^^ ^^             ^
+
++ {'code': '10001', 'msg': '取现成功', 'status': 1}
+?           ^^^             ^ ^^             ^
+
+2019-06-24 10:22:59,091 - [test_withdraw.py -->line:133] - INFO : 取现接口测试执行完毕......
