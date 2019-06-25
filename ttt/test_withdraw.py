@@ -22,7 +22,7 @@ from common.constant import DATA_DIR
 from common.http_request import HTTPRequest2
 from common.execute_mysql import ExecuteMysql
 from common.tools import rand_phone
-from common.tools import replace
+from common.tools import data_replace
 from decimal import Decimal
 
 
@@ -31,7 +31,6 @@ from decimal import Decimal
 file_name = conf.get('excel', 'file_name')
 read_column = conf.get('excel', 'read_column')
 read_column = eval(read_column)     # 将str转换成list
-# find_data = ExecuteMysql()
 
 
 @ddt
@@ -73,18 +72,17 @@ class WithdrawTestCase(unittest.TestCase):
 
         if "#login_phone#" in case.request_data:
             # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
-            # case.request_data = case.request_data.replace("#login_phone#", conf.get("test_data", "login_phone"))
-            case.request_data = replace(case.request_data)
+            case.request_data = data_replace(case.request_data)
 
         if "#pwd#" in case.request_data:
             # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-            # case.request_data = case.request_data.replace("#pwd#", conf.get("test_data", "pwd"))
-            case.request_data = replace(case.request_data)
+            case.request_data = data_replace(case.request_data)
 
         # 判断是否需要校验数据库
         if case.check_mysql:
             # 将登录手机号替换掉sql语句中的标记${login_phone}
-            case.check_mysql = case.check_mysql.replace("${login_phone}", conf.get('test_data', "login_phone"))
+            # case.check_mysql = case.check_mysql.replace("${login_phone}", conf.get('test_data', "login_phone"))
+            case.check_mysql = data_replace(case.check_mysql)
             # 调用查询数据方法，传入sql语句，返回元组，下标0取值，decimal
             before_money = self.db.find_one(case.check_mysql)[0]
 

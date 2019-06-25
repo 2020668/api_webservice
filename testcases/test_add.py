@@ -3,7 +3,7 @@
 
 =================================
 Author: keen
-Created on: 2019/6/14
+Created on: 2019/6/15
 
 E-mail:keen2020@outlook.com
 
@@ -11,7 +11,6 @@ E-mail:keen2020@outlook.com
 
 
 """
-
 
 import unittest
 from library.ddt import ddt, data
@@ -21,10 +20,8 @@ from common.config import conf
 import os
 from common.constant import DATA_DIR
 from common.http_request import HTTPRequest2
-from common.tools import rand_phone
-from common.tools import data_replace
 from common.execute_mysql import ExecuteMysql
-
+from common.tools import data_replace
 
 # 从配置文件获取数据
 file_name = conf.get('excel', 'file_name')
@@ -33,64 +30,60 @@ read_column = eval(read_column)     # 将str转换成list
 
 
 @ddt
-class LoginTestCase(unittest.TestCase):
+class AddTestCase(unittest.TestCase):
 
     # 拼接完整的excel路径，然后读取excel数据
-    wb = ReadExcel(os.path.join(DATA_DIR, file_name), "login")
+    wb = ReadExcel(os.path.join(DATA_DIR, file_name), "add")
     cases = wb.read_column_data(read_column)
 
     @classmethod
     def setUpClass(cls):
 
-        my_log.info("准备开始执行登录接口的测试......")
+        my_log.info("准备开始执行加标接口的测试......")
         cls.request = HTTPRequest2()
         cls.db = ExecuteMysql()
 
     @data(*cases)   # 拆包，拆成几个参数
-    def test_login(self, case):
+    def test_add(self, case):
 
-        # 筛选用例的请求数据中做了#register__phone#标记的数据
-        if "#register_phone#" in case.request_data:
-            while True:
-                # 生成随机号码
-                mobile_phone = rand_phone()
-                # 查询数据库有无该随机号码
-                count = self.db.find_count("SELECT Id FROM member WHERE MobilePhone={}".format(mobile_phone))
-                # 数据库中无此随机号码，就不用继续随机生成，直接使用该随机号码
-                if count == 0:
-                    break
-            # 将用例中的#register__phone#替换成随机生成的手机号码
-            case.request_data = case.request_data = case.request_data.replace("#register_phone#", mobile_phone)
-
-        # 选取请求的电话号为已注册的测试用例数据
-        elif "#exists_phone#" in case.request_data:
-            # 从数据库获取第一条号码，给用例参数
-            mobile_phone = self.db.find_one("SELECT MobilePhone FROM member LIMIT 1")[0]
-            # 用从数据库获取的号码替换掉请求数据中的标记#exists_phone
-            case.request_data = case.request_data.replace("#exists_phone#", mobile_phone)
-
-        elif "#login_phone#" in case.request_data:
+        if "#login_phone#" in case.request_data:
             # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
             case.request_data = data_replace(case.request_data)
 
-        elif "#pwd#" in case.request_data:
+        if "#pwd#" in case.request_data:
             # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
             case.request_data = data_replace(case.request_data)
 
-        # 拼接url地址
+        if "#memberid#" in case.request_data:
+            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
+            case.request_data = data_replace(case.request_data)
+
+        if case.check_mysql:
+            case.check_mysql = data_replace(case.check_mysql)
+            before_count = self.db.find_count(case.check_mysql)
+
+        # 拼接url地址，发送请求
         url = conf.get("env", "url") + case.url
         self.row = case.case_id + 1
-        response = self.request.request(method=case.method, url=url, data=eval(case.request_data))
-
+        response = self.request.request(method=case.method, url=url, data=eval(case.request_data))  # 将str转换成dict
         # 该打印的内容会显示在报告中
         print("请求数据--> {}".format(case.request_data))
         print("期望结果---> {}".format(case.expected_data))
         print("服务器响应数据--> {}".format(response.json()))
 
-        res = response.json()
-
         try:
+            # res = response.json()返回json格式，自动转换成Python的dict类型，只取部分字段进行断言
+            res = {"status": response.json()["status"], "code": response.json()["code"]}
             self.assertEqual(eval(case.expected_data), res)
+
+            if case.check_mysql:
+                case.check_mysql = data_replace(case.check_mysql)
+                after_count = self.db.find_count(case.check_mysql)
+                message = self.db.find_one("SELECT * FROM loan WHERE memberid=85409 ORDER BY CreateTime DESC LIMIT 1")
+                print("最近一条标的信息为：{}".format(message))
+                print("加标之前该用户的标数量为：{},加标后标数量为：{}".format(before_count, after_count))
+                self.assertEqual(before_count + 1, after_count)
+
         except AssertionError as e:
             result = 'FAIL'
             my_log.exception(e)     # 将异常信息记录到日志
@@ -98,11 +91,13 @@ class LoginTestCase(unittest.TestCase):
         else:
             result = 'PASS'
             my_log.debug("预期结果：%s, 实际结果：%s, 测试通过" % (eval(case.expected_data), res))
+
         finally:
-            self.wb.write_data(row=self.row, column=9, msg=result)
+            self.wb.write_data(row=self.row, column=10, msg=result)
 
     @classmethod
     def tearDownClass(cls):
 
-        my_log.info("登录接口测试执行完毕......")
+        my_log.info("加标接口测试执行完毕......")
         cls.request.close()
+        cls.db.close()

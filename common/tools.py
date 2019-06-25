@@ -20,14 +20,25 @@ import random
 p = r"#(.+?)#"
 
 
-def replace(data):
+class ConText(object):
+    pass
+
+
+# def read(data):
+#     setattr(ConText, "key", data)
+
+
+def data_replace(data):
     """
     :param data: 用例的参数
     :return: 替换之后的结果
     """
     while re.search(p, data):
         key = re.search(p, data).group(1)
-        value = conf.get("test_data", key)
+        try:
+            value = conf.get("test_data", key)
+        except:
+            value = getattr(ConText, "key")
         data = re.sub(p, value, data, count=1)
     return data
 
@@ -42,5 +53,5 @@ def rand_phone():
 
 if __name__ == '__main__':
     data = "hasdgiioghgaoigh#mobile_phone#shg;g#pwd#"
-    res = replace(data)
+    res = data_replace(data)
     print(res)
