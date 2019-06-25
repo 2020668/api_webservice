@@ -168,9 +168,29 @@ class ReadExcel(object):
     def read_column_data(self, read_column):
         if len(read_column) == 0:
             return self.read_data()
+        self.open()
+        cases = []
+        titles = []
+        max_r = self.sheet.max_row
+        for row in range(1, max_r+1):
+            if row != 1:
+                data = []
+                for column in read_column:
+                    data.append(self.sheet.cell(row, column).value)
+                case_data = zip(titles, data)
+                case_obj = Case(case_data)
+                cases.append(case_obj)
+            else:
+                for column in read_column:
+                    title = self.sheet.cell(row, column).value
+                    if title is not None:
+                        titles.append(title)
+
+        self.close()
+        return cases
 
     def write_data(self, row, column, msg):
         self.open()
         self.sheet.cell(row=row, column=column, value=msg)
         self.wb.save(self.file_name)
-
+        self.close()

@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+
+=================================
+Author: keen
+Created on: 2019/6/25
+
+E-mail:keen2020@outlook.com
+
+=================================
+
+
+"""
+
+import re
+from common.config import conf
+import random
+
+# 匹配任意字符，至少一次，关闭贪婪
+p = r"#(.+?)#"
+
+
+def replace(data):
+    """
+    :param data: 用例的参数
+    :return: 替换之后的结果
+    """
+    while re.search(p, data):
+        key = re.search(p, data).group(1)
+        value = conf.get("test_data", key)
+        data = re.sub(p, value, data, count=1)
+    return data
+
+
+def rand_phone():
+    phone = "133"
+    for i in range(8):
+        phone_end = random.randint(0, 9)
+        phone += str(phone_end)
+    return phone
+
+
+if __name__ == '__main__':
+    data = "hasdgiioghgaoigh#mobile_phone#shg;g#pwd#"
+    res = replace(data)
+    print(res)

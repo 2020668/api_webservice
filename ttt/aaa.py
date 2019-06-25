@@ -11,3 +11,10 @@ E-mail:keen2020@outlook.com
 
 
 """
+
+import re
+
+str = 'pythonhsgjgthashgpython'
+res = re.findall(r'py(th)on', str)
+print(res)
+
