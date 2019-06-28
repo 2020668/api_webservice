@@ -3,7 +3,7 @@
 
 =================================
 Author: keen
-Created on: 2019/6/24
+Created on: 2019/6/15
 
 E-mail:keen2020@outlook.com
 
@@ -22,9 +22,8 @@ from common.constant import DATA_DIR
 from common.http_request import HTTPRequest2
 from common.execute_mysql import ExecuteMysql
 from common.tools import data_replace
+# from common.tools import read
 from common.tools import ConText
-from decimal import Decimal
-
 
 # 从配置文件获取数据
 file_name = conf.get('excel', 'file_name')
@@ -33,47 +32,47 @@ read_column = eval(read_column)     # 将str转换成list
 
 
 @ddt
-class BidLoanTestCase(unittest.TestCase):
+class AuditTestCase(unittest.TestCase):
 
     # 拼接完整的excel路径，然后读取excel数据
-    wb = ReadExcel(os.path.join(DATA_DIR, file_name), "bidLoan")
+    wb = ReadExcel(os.path.join(DATA_DIR, file_name), "audit")
     cases = wb.read_column_data(read_column)
 
     @classmethod
     def setUpClass(cls):
 
-        my_log.info("准备开始执行取现接口的测试......")
+        my_log.info("准备开始执行审核接口的测试......")
         cls.request = HTTPRequest2()
         cls.db = ExecuteMysql()
 
     @data(*cases)   # 拆包，拆成几个参数
-    def test_bid_loan(self, case):
+    def test_audit(self, case):
+
+        if "#login_phone#" in case.request_data:
+            # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
+            case.request_data = data_replace(case.request_data)
+
+        if "#pwd#" in case.request_data:
+            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
+            case.request_data = data_replace(case.request_data)
+
+        if "#memberid#" in case.request_data:
+            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
+            case.request_data = data_replace(case.request_data)
 
         if case.check_mysql:
-            if " memberid=#memberid#" in case.check_mysql:
+            if "#memberid#" in case.check_mysql:
+                # 替换sql语句中的memberid
                 case.check_mysql = data_replace(case.check_mysql)
+                # 查询该memberid刚刚加标的loanid
                 loanid = self.db.find_one(case.check_mysql)[0]
+                # 将loanid赋给ConText类的key属性
                 setattr(ConText, "loanid", str(loanid))
+            else:
+                case.check_mysql = data_replace(case.check_mysql)
 
-        if "#nomemberid#" in case.request_data:
-            memberid = self.db.find_one("SELECT MAX(Id) FROM member")[0] + 1
-            case.request_data = case.request_data.replace("#nomemberid#", str(memberid))
-
-        if "#noloanid#" in case.request_data:
-            loanid = self.db.find_one("SELECT MAX(Id) FROM loan")[0] + 1
-            case.request_data = case.request_data.replace("#noloanid#", str(loanid))
-
-        # 判断是否需要校验数据库
-        if case.check_mysql:
-            # 将登录手机号替换掉sql语句中的标记${login_phone}
-            mobile_phone = conf.get("test_data", "login_phone")
-            memberid = self.db.find_one("SELECT Id FROM member WHERE MobilePhone={}".format(mobile_phone))[0]
-            case.check_mysql = case.check_mysql.replace("#memberid#", str(memberid))
-            # 调用查询数据方法，传入sql语句，返回元组，下标0取值，decimal
-            before_money = self.db.find_one(case.check_mysql)[0]
-
-        # 先替换有特殊字段和sql语句的，再来替换一般用例
-        case.request_data = data_replace(case.request_data)
+        if "#loanid#" in case.request_data:
+            case.request_data = data_replace(case.request_data)
 
         # 拼接url地址，发送请求
         url = conf.get("env", "url") + case.url
@@ -81,24 +80,17 @@ class BidLoanTestCase(unittest.TestCase):
         response = self.request.request(method=case.method, url=url, data=eval(case.request_data))  # 将str转换成dict
         # 该打印的内容会显示在报告中
         print("请求数据--> {}".format(case.request_data))
-        print("期望结果---> {}".format(case.expected_data))
+        print("期望结果--> {}".format(case.expected_data))
         print("服务器响应数据--> {}".format(response.json()))
+        # after_status = self.db.find_one(case.check_mysql)[0]
+        if '更新状态成功' in response.json()["msg"]:
+            after_status = self.db.find_one(case.check_mysql)[0]
+            print("执行测试用例后标的状态为--> {}".format(after_status))
 
         try:
             # res = response.json()返回json格式，自动转换成Python的dict类型，只取部分字段进行断言
             res = {"status": response.json()["status"], "code": response.json()["code"]}
             self.assertEqual(eval(case.expected_data), res)
-
-            if case.check_mysql:
-                if "竞标成功" in response.json()["msg"]:
-                    # case.request_data是str类型，先转换为dict再来取值,float
-                    money = eval(case.request_data)["amount"]
-                    # 将float类型转换成decimal类型，与数据库查询的结果数据类型一致，并设置保留2位小数
-                    money = Decimal.from_float(money).quantize(Decimal("0.00"))
-                    after_money = self.db.find_one(case.check_mysql)[0]
-                    # 该打印的内容会显示在报告中
-                    print("投资前余额为:{}, 本次投资:{}, 投资后余额:{}".format(before_money, money, after_money))
-                    self.assertEqual(before_money - money, after_money)
 
         except AssertionError as e:
             result = 'FAIL'
@@ -114,6 +106,6 @@ class BidLoanTestCase(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
 
-        my_log.info("取现接口测试执行完毕......")
+        my_log.info("审核接口测试执行完毕......")
         cls.request.close()
         cls.db.close()

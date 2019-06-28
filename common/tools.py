@@ -38,7 +38,9 @@ def data_replace(data):
         try:
             value = conf.get("test_data", key)
         except:
-            value = getattr(ConText, "key")
+            # value = getattr(ConText, "loanid")
+            if "loanid" in data:
+                value = getattr(ConText, "loanid")
         data = re.sub(p, value, data, count=1)
     return data
 
