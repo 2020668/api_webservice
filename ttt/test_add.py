@@ -46,17 +46,7 @@ class AddTestCase(unittest.TestCase):
     @data(*cases)   # 拆包，拆成几个参数
     def test_add(self, case):
 
-        if "#login_phone#" in case.request_data:
-            # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
-            case.request_data = data_replace(case.request_data)
-
-        if "#pwd#" in case.request_data:
-            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-            case.request_data = data_replace(case.request_data)
-
-        if "#memberid#" in case.request_data:
-            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-            case.request_data = data_replace(case.request_data)
+        case.request_data = data_replace(case.request_data)
 
         if case.check_mysql:
             case.check_mysql = data_replace(case.check_mysql)
@@ -79,7 +69,8 @@ class AddTestCase(unittest.TestCase):
             if case.check_mysql:
                 case.check_mysql = data_replace(case.check_mysql)
                 after_count = self.db.find_count(case.check_mysql)
-                message = self.db.find_one("SELECT * FROM loan WHERE memberid=85409 ORDER BY CreateTime DESC LIMIT 1")
+                memberid = eval(case.request_data)["memberId"]
+                message = self.db.find_one("SELECT * FROM loan WHERE memberid={} ORDER BY CreateTime DESC LIMIT 1".format(memberid))
                 print("最近一条标的信息为：{}".format(message))
                 print("加标之前该用户的标数量为：{},加标后标数量为：{}".format(before_count, after_count))
                 self.assertEqual(before_count + 1, after_count)

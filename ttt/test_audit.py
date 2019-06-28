@@ -48,20 +48,16 @@ class AuditTestCase(unittest.TestCase):
     @data(*cases)   # 拆包，拆成几个参数
     def test_audit(self, case):
 
-        if "#login_phone#" in case.request_data:
-            # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
-            case.request_data = data_replace(case.request_data)
+        case.request_data = data_replace(case.request_data)
 
-        if "#pwd#" in case.request_data:
-            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-            case.request_data = data_replace(case.request_data)
+        # 拼接url地址，发送请求
+        url = conf.get("env", "url") + case.url
+        self.row = case.case_id + 1
+        response = self.request.request(method=case.method, url=url, data=eval(case.request_data))  # 将str转换成dict
 
-        if "#memberid#" in case.request_data:
-            # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-            case.request_data = data_replace(case.request_data)
-
+        # 发送请求后再来查询，确保查询的结果是最新的
         if case.check_mysql:
-            if "#memberid#" in case.check_mysql:
+            if "#memberid4#" in case.check_mysql:
                 # 替换sql语句中的memberid
                 case.check_mysql = data_replace(case.check_mysql)
                 # 查询该memberid刚刚加标的loanid
@@ -71,13 +67,6 @@ class AuditTestCase(unittest.TestCase):
             else:
                 case.check_mysql = data_replace(case.check_mysql)
 
-        if "#loanid#" in case.request_data:
-            case.request_data = data_replace(case.request_data)
-
-        # 拼接url地址，发送请求
-        url = conf.get("env", "url") + case.url
-        self.row = case.case_id + 1
-        response = self.request.request(method=case.method, url=url, data=eval(case.request_data))  # 将str转换成dict
         # 该打印的内容会显示在报告中
         print("请求数据--> {}".format(case.request_data))
         print("期望结果--> {}".format(case.expected_data))

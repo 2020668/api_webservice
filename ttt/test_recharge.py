@@ -72,15 +72,6 @@ class RechargeTestCase(unittest.TestCase):
 
         case.request_data = data_replace(case.request_data)
 
-        # if "#login_phone#" in case.request_data:
-        #     # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
-        #     # case.request_data = case.request_data.replace("#login_phone#", conf.get("test_data", "mobile_phone"))
-        #     case.request_data = data_replace(case.request_data)
-        #
-        # if "#pwd#" in case.request_data:
-        #     # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-        #     case.request_data = data_replace(case.request_data)
-
         # 判断是否需要校验数据库
         if case.check_mysql:
             # 将登录手机号替换掉sql语句中的标记${login_phone}

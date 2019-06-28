@@ -71,14 +71,6 @@ class LoginTestCase(unittest.TestCase):
 
         case.request_data = data_replace(case.request_data)
 
-        # elif "#login_phone#" in case.request_data:
-        #     # 将登录手机号从配置文件中读取并替换掉用例中的#login_phone#
-        #     case.request_data = data_replace(case.request_data)
-        #
-        # elif "#pwd#" in case.request_data:
-        #     # 将登录密码从配置文件中读取并替换掉用例中的#login_phone#
-        #     case.request_data = data_replace(case.request_data)
-
         # 拼接url地址
         url = conf.get("env", "url") + case.url
         self.row = case.case_id + 1
