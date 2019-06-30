@@ -15,8 +15,9 @@ E-mail:keen2020@outlook.com
 import unittest
 from library.HTMLTestRunnerNew import HTMLTestRunner
 from common.config import conf
-import os
 from common.constant import CASE_DIR, REPORT_DIR
+from common.send_email import send_qq_file_mail, send_outlook_file_mail
+import os
 import time
 
 
@@ -31,7 +32,9 @@ suite = unittest.TestSuite()  # 创建测试集合
 loader = unittest.TestLoader()
 suite.addTest(loader.discover(CASE_DIR))
 
-with open(os.path.join(REPORT_DIR, report_name), 'wb') as f:
+file_path = os.path.join(REPORT_DIR, report_name)
+
+with open(file_path, 'wb') as f:
     runner = HTMLTestRunner(
         stream=f,
         verbosity=2,
@@ -40,3 +43,9 @@ with open(os.path.join(REPORT_DIR, report_name), 'wb') as f:
         tester=_tester
     )
     runner.run(suite)
+
+
+mail_title = "前程贷项目接口测试报告"
+mail_message = "这是前程贷接口测试报告，请各位领导注意查收，谢谢!"
+# send_qq_file_mail(mail_title, mail_message, file_path)
+send_outlook_file_mail(mail_title, mail_message, file_path)
