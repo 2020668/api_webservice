@@ -171,3 +171,7 @@ class SendEmail(object):
             print("send outlook_email successfully")
         except:
             print("send outlook_email failed")
+
+
+if __name__ == '__main__':
+    pass
