@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/qcd_api_test.iml" filepath="$PROJECT_DIR$/.idea/qcd_api_test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/api_webservice.iml" filepath="$PROJECT_DIR$/.idea/api_webservice.iml" />
     </modules>
   </component>
 </project>

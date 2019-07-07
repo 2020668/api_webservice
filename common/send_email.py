@@ -57,7 +57,7 @@ class SendEmail(object):
     def send_qq_email(self):
 
         msg_from = '3023087535@qq.com'           # 发送方邮箱
-        passwd = 'egxkxbfwyvdxdeje'     # 填入发送方邮箱的授权码
+        passwd = 'qfzazbaxqgyodcga'     # 填入发送方邮箱的授权码
         receivers = ['415250069@qq.com', '87313199@qq.com']         # 收件人邮箱
 
         subject = '今日份的睡前小故事'             # 主题
