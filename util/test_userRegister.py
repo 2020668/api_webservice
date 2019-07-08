@@ -90,9 +90,12 @@ class UserRegisterTestCase(unittest.TestCase):
         data = eval(case.request_data)
         res = web_service.service.userRegister(data)
         result = dict(res)
+        # 成功服务器响应数据{'retCode': 0, 'retInfo': ok}，需将ok --> 'ok'
         if 'retCode' in str(result):
             result = {'retCode': result['retCode'], 'retInfo': str(result['retInfo'])}
+        # 由于测试失败返回的数据特殊{'faultcode': soap:Server, 'faultstring': 手机号码错误}，只能转换为str再来断言
         else:
+            print(str(eval(case.expected_data)['faultcode']))
             result = str(result)
 
         # 该打印的内容会显示在报告中
@@ -102,10 +105,11 @@ class UserRegisterTestCase(unittest.TestCase):
         print("服务器响应数据类型：{}".format(type(result)))
 
         try:
-            if 'retCode' in case.expected_data:
-                self.assertEqual(eval(case.expected_data), result)
-            else:
-                self.assertEqual(case.expected_data, str(result))
+            # if 'retCode' in case.expected_data:
+            #     self.assertEqual(eval(case.expected_data), result)
+            # else:
+            #     self.assertEqual(case.expected_data, str(result))
+            self.assertEqual(eval(case.expected_data), result)
 
         except AssertionError as e:
             result = 'FAIL'
