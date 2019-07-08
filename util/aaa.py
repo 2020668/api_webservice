@@ -15,24 +15,38 @@
 # # 默认result类型，转换成dict
 # res = web_service.service.sendMCode(data)
 # print(dict(res))
-# # print(res["faultcode"])
 
-# from suds import client
-from common import client
 
+# from common import client
+#
+# # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
 # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
-url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
-# 获取该地址下的webservice对象
-web_service = client.Client(url=url)
-# print(web_service)
+# # 获取该地址下的webservice对象
+# web_service = client.Client(url=url)
+#
+#
+# # 构造请求参数
+# data = {"verify_code":"012393", "user_id":"baoi","channel_id":"1","pwd":"123456", 'mobile':'13089905136',"ip":"1.1.1.1"}
+#
+#
+# # 默认result类型，转换成dict
+# res = web_service.service.userRegister(data)
+# print(dict(res))
 
-# 构造请求参数
-data = {"verify_code":"607183", "user_id":"baozi","channel_id":"1","pwd":"123456", 'mobile':'#13116097510#',"ip":"1.1.1.1"}
+#python随机生成包含字母数字的六位验证码
+import random
 
-# res = web_service.service.sendMCode(data)
-# 默认result类型，转换成dict
-res = web_service.service.userRegister(data)
-print(dict(res))
-# print(res["faultcode"])
+
+def v_code():
+    ret = ""
+    for i in range(6):
+        num = random.randint(0, 9)
+        # num = chr(random.randint(48,57))#ASCII表示数字
+        letter = chr(random.randint(97, 122))#取小写字母
+        Letter = chr(random.randint(65, 90))#取大写字母
+        s = str(random.choice([num,letter,Letter]))
+        ret += s
+    return ret
+
 
 
