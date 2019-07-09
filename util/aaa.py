@@ -49,21 +49,39 @@
 #         ret += s
 #     return ret
 
-from common import client
-
+# from common import client
+#
+# # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
 # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
-url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
-# 获取该地址下的webservice对象
-web_service = client.Client(url=url)
+# # 获取该地址下的webservice对象
+# web_service = client.Client(url=url)
+#
+#
+# # 构造请求参数
+# data = {"uid":"128736679730", "true_name":"陈晶晶","cre_id":"42112619880909724"}
+#
+#
+# # 默认result类型，转换成dict
+# res = web_service.service.verifyUserAuth(data)
+# print(dict(res))
 
+# import random
+#
+#
+# def rand_ip():
+#     ip = '{}.{}.{}.{}'.format(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+#     return ip
+#
+#
+# ip = rand_ip()
+# print(ip)
 
-# 构造请求参数
-data = {"uid":"128736679730", "true_name":"陈晶晶","cre_id":"42112619880909724"}
+# 获取指定字符串后的字符，如：phone后面的130
 
+def m_code(ip, mobile):
+    data = {'client_ip': ip, 'tmpl_id': '1', 'mobile': mobile}
+    url = 'http://120.24.235.105:9010/sms-service-war-1.0/ws/smsFacade.ws?wsdl'
 
-# 默认result类型，转换成dict
-res = web_service.service.verifyUserAuth(data)
-print(dict(res))
 
 
 

@@ -49,7 +49,7 @@ def data_replace(data):
             if "loanid" in data:
                 value = getattr(ConText, "loanid")
             if "phone1" in data:
-                value = rand_phone(eval(data)["mobile"][6:9])
+                value = rand_phone(eval(data)["mobile"][6:9])   # 获取phone后面的手机号段
         data = re.sub(p, value, data, count=1)
     return data
 
@@ -58,12 +58,17 @@ def v_code():
     ret = ""
     for i in range(6):
         num = random.randint(0, 9)
-        # num = chr(random.randint(48,57))#ASCII表示数字
-        letter = chr(random.randint(97, 122))#取小写字母
-        Letter = chr(random.randint(65, 90))#取大写字母
+        # num = chr(random.randint(48,57))  # ASCII表示数字
+        letter = chr(random.randint(97, 122))   # 取小写字母
+        Letter = chr(random.randint(65, 90))    # 取大写字母
         s = str(random.choice([num, letter, Letter]))
         ret += s
     return ret
+
+
+def rand_ip():
+    ip = '{}.{}.{}.{}'.format(random.randint(0, 255),random.randint(0, 255),random.randint(0, 255),random.randint(0, 255))
+    return ip
 
 
 if __name__ == '__main__':
@@ -75,10 +80,15 @@ if __name__ == '__main__':
     # data = "#phone133#"
     # data = data_replace(data)
     # print(data)
-    data = "{'client_ip':'1.1.1.1', 'tmpl_id':'1', 'mobile':'#phone130#'}"
+    # data = "{'client_ip':'1.1.1.1', 'tmpl_id':'1', 'mobile':'#phone130#'}"
     # # data = data_replace(data)
     # # print(data)
     # res = eval(data)["mobile"]
-    res = data_replace(data)
-    print(res)
-    print(type(res))
+    # res = data_replace(data)
+    # print(res)
+    # print(type(res))
+    # print(rand_ip())
+    # print(v_code())
+    d = "{'client_ip':'$ip', 'tmpl_id':'1', 'mobile':'#phone147#'}"
+    data = data_replace(d)
+    print(data)

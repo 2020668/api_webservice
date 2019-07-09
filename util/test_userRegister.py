@@ -65,6 +65,15 @@ class UserRegisterTestCase(unittest.TestCase):
         cls.request = HTTPRequest2()
         cls.db = ExecuteMysql()
 
+    @classmethod
+    def tearDownClass(cls):
+
+        my_log.info("注册接口测试执行完毕......")
+        cls.request.close()
+        cls.db.close()
+
+    # def m_code(self, ):
+
     @data(*cases)   # 拆包，拆成几个参数
     def test_user_register(self, case):
 
@@ -121,10 +130,3 @@ class UserRegisterTestCase(unittest.TestCase):
 
         finally:
             self.wb.write_data(row=self.row, column=8, msg=result)
-
-    @classmethod
-    def tearDownClass(cls):
-
-        my_log.info("注册接口测试执行完毕......")
-        cls.request.close()
-        cls.db.close()
