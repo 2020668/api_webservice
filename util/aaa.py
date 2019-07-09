@@ -78,9 +78,26 @@
 
 # 获取指定字符串后的字符，如：phone后面的130
 
+
+from common.web_request import WebRequests
+from common.execute_mysql import ExecuteMysql
+
+
 def m_code(ip, mobile):
     data = {'client_ip': ip, 'tmpl_id': '1', 'mobile': mobile}
     url = 'http://120.24.235.105:9010/sms-service-war-1.0/ws/smsFacade.ws?wsdl'
+    webs = WebRequests()
+    response = webs.web_request(url=url, interface="sendMCode", data=data)
+    sql = "SELECT Fverify_code FROM sms_db_{}.t_mvcode_info_{} WHERE Fmobile_no={}". \
+        format(mobile[9:11], mobile[8], mobile)
+    db = ExecuteMysql()
+    mcode = db.find_one(sql)[0]
+    return mcode
+
+
+if __name__ == '__main__':
+    res = m_code('1.1.1.1', '13387655556')
+    print(res)
 
 
 

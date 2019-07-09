@@ -33,7 +33,6 @@ class WebRequests(object):
             return {'code': dict(response)['retCode'], 'msg': dict(response)['retInfo']}
 
     def web_request(self, url, interface, data):
-        print('请求数据: {}'.format(data))
 
         self.webs = client.Client(url=url)      # 传入url，创建webservice对象，打印对象可查看对象内部的方法
 

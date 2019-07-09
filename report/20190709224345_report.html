@@ -1,0 +1,2286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>qcd_jk_report</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 120%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">qcd_jk_report</h1>
+<p class='attribute'><strong>测试人员 : </strong> keen</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-07-09 22:43:46</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:01:07.508501</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 93，通过 80，失败 13，通过率= 86.02%</p>
+
+<p class='description'>前程贷项目接口测试第1份报告</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 86.02% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 13 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 80 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 93 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 16px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>test_sendMCode.SendMCodeTestCase</td>
+    <td class="text-center">53</td>
+    <td class="text-center">40</td>
+    <td class="text-center">13</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',53)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_01: 正常发送（手机号段130）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_1'>通过</button>
+    <div id='div_pt1_1' class="collapse in" align="left">
+    <pre>
+    
+pt1_1: 请求参数--&gt; {'client_ip': '39.4.242.33', 'tmpl_id': '1', 'mobile': '13038493065'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_02: 正常发送（手机号段131）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_2'>通过</button>
+    <div id='div_pt1_2' class="collapse in" align="left">
+    <pre>
+    
+pt1_2: 请求参数--&gt; {'client_ip':'176.87.15.116', 'tmpl_id':'1', 'mobile':'13125385139'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_03: 正常发送（手机号段132）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_3'>通过</button>
+    <div id='div_pt1_3' class="collapse in" align="left">
+    <pre>
+    
+pt1_3: 请求参数--&gt; {'client_ip':'82.133.30.226', 'tmpl_id':'1', 'mobile':'13295306971'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_04: 正常发送（手机号段133）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_4'>通过</button>
+    <div id='div_pt1_4' class="collapse in" align="left">
+    <pre>
+    
+pt1_4: 请求参数--&gt; {'client_ip':'224.87.191.52', 'tmpl_id':'1', 'mobile':'13329898562'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_05: 正常发送（手机号段134）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_5'>通过</button>
+    <div id='div_pt1_5' class="collapse in" align="left">
+    <pre>
+    
+pt1_5: 请求参数--&gt; {'client_ip':'155.187.98.96', 'tmpl_id':'1', 'mobile':'13438079290'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_06: 正常发送（手机号段135）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_6'>通过</button>
+    <div id='div_pt1_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_6'>通过</button>
+    <div id='div_pt1_6' class="collapse in" align="left">
+    <pre>
+    
+pt1_6: 请求参数--&gt; {'client_ip':'229.28.122.78', 'tmpl_id':'1', 'mobile':'13580417691'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_07: 正常发送（手机号段136）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_7'>通过</button>
+    <div id='div_pt1_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_7'>通过</button>
+    <div id='div_pt1_7' class="collapse in" align="left">
+    <pre>
+    
+pt1_7: 请求参数--&gt; {'client_ip':'40.241.108.127', 'tmpl_id':'1', 'mobile':'13617482465'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_08: 正常发送（手机号段137）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_8'>通过</button>
+    <div id='div_pt1_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_8'>通过</button>
+    <div id='div_pt1_8' class="collapse in" align="left">
+    <pre>
+    
+pt1_8: 请求参数--&gt; {'client_ip':'168.37.4.36', 'tmpl_id':'1', 'mobile':'13797778377'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_09: 正常发送（手机号段138）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_9'>通过</button>
+    <div id='div_pt1_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_9'>通过</button>
+    <div id='div_pt1_9' class="collapse in" align="left">
+    <pre>
+    
+pt1_9: 请求参数--&gt; {'client_ip':'220.131.131.177', 'tmpl_id':'1', 'mobile':'13842363120'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_10: 正常发送（手机号段139）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_10'>通过</button>
+    <div id='div_pt1_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_10'>通过</button>
+    <div id='div_pt1_10' class="collapse in" align="left">
+    <pre>
+    
+pt1_10: 请求参数--&gt; {'client_ip':'73.168.102.12', 'tmpl_id':'1', 'mobile':'13973730059'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_11: 正常发送（手机号段145）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_11'>通过</button>
+    <div id='div_pt1_11' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_11'>通过</button>
+    <div id='div_pt1_11' class="collapse in" align="left">
+    <pre>
+    
+pt1_11: 请求参数--&gt; {'client_ip':'73.182.22.42', 'tmpl_id':'1', 'mobile':'14550899684'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_12: 正常发送（手机号段147）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_12'>通过</button>
+    <div id='div_pt1_12' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_12'>通过</button>
+    <div id='div_pt1_12' class="collapse in" align="left">
+    <pre>
+    
+pt1_12: 请求参数--&gt; {'client_ip':'252.125.45.67', 'tmpl_id':'1', 'mobile':'14753589971'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_13' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_13: 正常发送（手机号段149）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_13'>失败</button>
+    <div id='div_ft1_13' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_13'>失败</button>
+    <div id='div_ft1_13' class="collapse in" align="left">
+    <pre>
+    
+ft1_13: &lt;suds.sax.document.Document object at 0x00000120D3C9D780&gt;
+请求参数--&gt; {'client_ip':'59.77.246.149', 'tmpl_id':'1', 'mobile':'14975100565'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_14: 正常发送（手机号段150）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_14'>通过</button>
+    <div id='div_pt1_14' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_14'>通过</button>
+    <div id='div_pt1_14' class="collapse in" align="left">
+    <pre>
+    
+pt1_14: 请求参数--&gt; {'client_ip':'234.15.21.70', 'tmpl_id':'1', 'mobile':'15016921196'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_15: 正常发送（手机号段151）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_15'>通过</button>
+    <div id='div_pt1_15' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_15'>通过</button>
+    <div id='div_pt1_15' class="collapse in" align="left">
+    <pre>
+    
+pt1_15: 请求参数--&gt; {'client_ip':'232.108.179.172', 'tmpl_id':'1', 'mobile':'15153155978'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_16: 正常发送（手机号段152）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_16'>通过</button>
+    <div id='div_pt1_16' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_16'>通过</button>
+    <div id='div_pt1_16' class="collapse in" align="left">
+    <pre>
+    
+pt1_16: 请求参数--&gt; {'client_ip':'8.63.189.73', 'tmpl_id':'1', 'mobile':'15212649975'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_17: 正常发送（手机号段153）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_17'>通过</button>
+    <div id='div_pt1_17' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_17'>通过</button>
+    <div id='div_pt1_17' class="collapse in" align="left">
+    <pre>
+    
+pt1_17: 请求参数--&gt; {'client_ip':'54.40.217.1', 'tmpl_id':'1', 'mobile':'15394325945'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_18: 正常发送（手机号段155）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_18'>通过</button>
+    <div id='div_pt1_18' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_18'>通过</button>
+    <div id='div_pt1_18' class="collapse in" align="left">
+    <pre>
+    
+pt1_18: 请求参数--&gt; {'client_ip':'238.174.155.238', 'tmpl_id':'1', 'mobile':'15579299655'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_19: 正常发送（手机号段156）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_19'>通过</button>
+    <div id='div_pt1_19' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_19'>通过</button>
+    <div id='div_pt1_19' class="collapse in" align="left">
+    <pre>
+    
+pt1_19: 请求参数--&gt; {'client_ip':'211.29.214.167', 'tmpl_id':'1', 'mobile':'15621688378'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_20: 正常发送（手机号段157）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_20'>通过</button>
+    <div id='div_pt1_20' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_20'>通过</button>
+    <div id='div_pt1_20' class="collapse in" align="left">
+    <pre>
+    
+pt1_20: 请求参数--&gt; {'client_ip':'44.187.149.128', 'tmpl_id':'1', 'mobile':'15794175314'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_21: 正常发送（手机号段158）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_21'>通过</button>
+    <div id='div_pt1_21' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_21' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_21'>通过</button>
+    <div id='div_pt1_21' class="collapse in" align="left">
+    <pre>
+    
+pt1_21: 请求参数--&gt; {'client_ip':'11.108.129.132', 'tmpl_id':'1', 'mobile':'15830869926'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_22: 正常发送（手机号段159）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_22' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_22'>通过</button>
+    <div id='div_pt1_22' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_22' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_22'>通过</button>
+    <div id='div_pt1_22' class="collapse in" align="left">
+    <pre>
+    
+pt1_22: 请求参数--&gt; {'client_ip':'240.3.138.215', 'tmpl_id':'1', 'mobile':'15989815644'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_23' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_23: 正常发送（手机号段166）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_23' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_23'>失败</button>
+    <div id='div_ft1_23' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_23' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_23'>失败</button>
+    <div id='div_ft1_23' class="collapse in" align="left">
+    <pre>
+    
+ft1_23: &lt;suds.sax.document.Document object at 0x00000120D338B588&gt;
+请求参数--&gt; {'client_ip':'93.107.153.231', 'tmpl_id':'1', 'mobile':'16667352679'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_24: 正常发送（手机号段170）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_24' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_24'>通过</button>
+    <div id='div_pt1_24' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_24' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_24'>通过</button>
+    <div id='div_pt1_24' class="collapse in" align="left">
+    <pre>
+    
+pt1_24: 请求参数--&gt; {'client_ip':'90.200.2.205', 'tmpl_id':'1', 'mobile':'17029027776'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_25' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_25: 正常发送（手机号段171）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_25' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_25'>失败</button>
+    <div id='div_ft1_25' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_25' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_25'>失败</button>
+    <div id='div_ft1_25' class="collapse in" align="left">
+    <pre>
+    
+ft1_25: &lt;suds.sax.document.Document object at 0x00000120D32D3D68&gt;
+请求参数--&gt; {'client_ip':'196.2.28.203', 'tmpl_id':'1', 'mobile':'17163611932'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_26' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_26: 正常发送（手机号段172）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_26' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_26'>失败</button>
+    <div id='div_ft1_26' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_26' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_26'>失败</button>
+    <div id='div_ft1_26' class="collapse in" align="left">
+    <pre>
+    
+ft1_26: &lt;suds.sax.document.Document object at 0x00000120D3AC1A90&gt;
+请求参数--&gt; {'client_ip':'41.193.253.111', 'tmpl_id':'1', 'mobile':'17239664502'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_27' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_27: 正常发送（手机号段173）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_27' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_27'>失败</button>
+    <div id='div_ft1_27' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_27' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_27'>失败</button>
+    <div id='div_ft1_27' class="collapse in" align="left">
+    <pre>
+    
+ft1_27: &lt;suds.sax.document.Document object at 0x00000120D3BFA390&gt;
+请求参数--&gt; {'client_ip':'8.152.136.254', 'tmpl_id':'1', 'mobile':'17356112619'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_28' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_28: 正常发送（手机号段175）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_28' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_28'>失败</button>
+    <div id='div_ft1_28' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_28' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_28'>失败</button>
+    <div id='div_ft1_28' class="collapse in" align="left">
+    <pre>
+    
+ft1_28: &lt;suds.sax.document.Document object at 0x00000120D3CF3668&gt;
+请求参数--&gt; {'client_ip':'16.1.241.133', 'tmpl_id':'1', 'mobile':'17504058972'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_29: 正常发送（手机号段176）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_29' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_29'>通过</button>
+    <div id='div_pt1_29' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_29' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_29'>通过</button>
+    <div id='div_pt1_29' class="collapse in" align="left">
+    <pre>
+    
+pt1_29: 请求参数--&gt; {'client_ip':'98.114.65.196', 'tmpl_id':'1', 'mobile':'17637590632'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_30: 正常发送（手机号段177）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_30' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_30'>通过</button>
+    <div id='div_pt1_30' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_30' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_30'>通过</button>
+    <div id='div_pt1_30' class="collapse in" align="left">
+    <pre>
+    
+pt1_30: 请求参数--&gt; {'client_ip':'20.116.247.131', 'tmpl_id':'1', 'mobile':'17748338845'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_31: 正常发送（手机号段178）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_31' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_31'>通过</button>
+    <div id='div_pt1_31' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_31' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_31'>通过</button>
+    <div id='div_pt1_31' class="collapse in" align="left">
+    <pre>
+    
+pt1_31: 请求参数--&gt; {'client_ip':'56.60.9.195', 'tmpl_id':'1', 'mobile':'17812570839'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_32: 正常发送（手机号段180）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_32' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_32'>通过</button>
+    <div id='div_pt1_32' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_32' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_32'>通过</button>
+    <div id='div_pt1_32' class="collapse in" align="left">
+    <pre>
+    
+pt1_32: 请求参数--&gt; {'client_ip':'91.12.173.151', 'tmpl_id':'1', 'mobile':'18018444786'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_33: 正常发送（手机号段181）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_33' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_33'>通过</button>
+    <div id='div_pt1_33' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_33' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_33'>通过</button>
+    <div id='div_pt1_33' class="collapse in" align="left">
+    <pre>
+    
+pt1_33: 请求参数--&gt; {'client_ip':'145.28.63.56', 'tmpl_id':'1', 'mobile':'18159670240'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_34: 正常发送（手机号段182）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_34' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_34'>通过</button>
+    <div id='div_pt1_34' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_34' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_34'>通过</button>
+    <div id='div_pt1_34' class="collapse in" align="left">
+    <pre>
+    
+pt1_34: 请求参数--&gt; {'client_ip':'138.179.57.237', 'tmpl_id':'1', 'mobile':'18294474975'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_35: 正常发送（手机号段183）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_35' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_35'>通过</button>
+    <div id='div_pt1_35' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_35' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_35'>通过</button>
+    <div id='div_pt1_35' class="collapse in" align="left">
+    <pre>
+    
+pt1_35: 请求参数--&gt; {'client_ip':'166.119.60.112', 'tmpl_id':'1', 'mobile':'18304363779'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_36: 正常发送（手机号段184）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_36' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_36'>通过</button>
+    <div id='div_pt1_36' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_36' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_36'>通过</button>
+    <div id='div_pt1_36' class="collapse in" align="left">
+    <pre>
+    
+pt1_36: 请求参数--&gt; {'client_ip':'53.13.201.211', 'tmpl_id':'1', 'mobile':'18454520831'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_37' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_37: 正常发送（手机号段185）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_37' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_37'>通过</button>
+    <div id='div_pt1_37' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_37' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_37'>通过</button>
+    <div id='div_pt1_37' class="collapse in" align="left">
+    <pre>
+    
+pt1_37: 请求参数--&gt; {'client_ip':'189.75.14.14', 'tmpl_id':'1', 'mobile':'18566661382'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_38' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_38: 正常发送（手机号段186）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_38' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_38'>通过</button>
+    <div id='div_pt1_38' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_38' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_38'>通过</button>
+    <div id='div_pt1_38' class="collapse in" align="left">
+    <pre>
+    
+pt1_38: 请求参数--&gt; {'client_ip':'110.138.59.77', 'tmpl_id':'1', 'mobile':'18627957807'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_39' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_39: 正常发送（手机号段187）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_39' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_39'>通过</button>
+    <div id='div_pt1_39' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_39' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_39'>通过</button>
+    <div id='div_pt1_39' class="collapse in" align="left">
+    <pre>
+    
+pt1_39: 请求参数--&gt; {'client_ip':'88.137.130.159', 'tmpl_id':'1', 'mobile':'18750461030'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_40' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_40: 正常发送（手机号段188）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_40' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_40'>通过</button>
+    <div id='div_pt1_40' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_40' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_40'>通过</button>
+    <div id='div_pt1_40' class="collapse in" align="left">
+    <pre>
+    
+pt1_40: 请求参数--&gt; {'client_ip':'188.92.131.9', 'tmpl_id':'1', 'mobile':'18861850166'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_41' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_41: 正常发送（手机号段189）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_41' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_41'>通过</button>
+    <div id='div_pt1_41' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_41' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_41'>通过</button>
+    <div id='div_pt1_41' class="collapse in" align="left">
+    <pre>
+    
+pt1_41: 请求参数--&gt; {'client_ip':'170.176.207.233', 'tmpl_id':'1', 'mobile':'18981741261'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_42' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_42: 正常发送（手机号段198）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_42' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_42'>失败</button>
+    <div id='div_ft1_42' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_42' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_42'>失败</button>
+    <div id='div_ft1_42' class="collapse in" align="left">
+    <pre>
+    
+ft1_42: &lt;suds.sax.document.Document object at 0x00000120D33CBBA8&gt;
+请求参数--&gt; {'client_ip':'168.67.117.36', 'tmpl_id':'1', 'mobile':'19811195367'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_43' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_43: 正常发送（手机号段199）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_43' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_43'>失败</button>
+    <div id='div_ft1_43' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_43' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_43'>失败</button>
+    <div id='div_ft1_43' class="collapse in" align="left">
+    <pre>
+    
+ft1_43: &lt;suds.sax.document.Document object at 0x00000120D37AFA90&gt;
+请求参数--&gt; {'client_ip':'26.179.139.49', 'tmpl_id':'1', 'mobile':'19938224641'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 88, in test_send_m_code
+    self.assertEqual(eval(case.expected_data), response)
+AssertionError: {'retCode': '0', 'retInfo': 'ok'} != {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+- {'retCode': '0', 'retInfo': 'ok'}
++ {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_44' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_44: ip有负数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_44' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_44'>失败</button>
+    <div id='div_ft1_44' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_44' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_44'>失败</button>
+    <div id='div_ft1_44' class="collapse in" align="left">
+    <pre>
+    
+ft1_44: 请求参数--&gt; {'client_ip':'-100.1.1.1', 'tmpl_id':'1', 'mobile':'13350208548'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': 'ip非法'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 90, in test_send_m_code
+    self.assertEqual(case.expected_data, str(response))
+AssertionError: "{'faultcode': 'soap:Server', 'faultstring': 'ip非法'}" != "{'retCode': 0, 'retInfo': ok}"
+- {'faultcode': 'soap:Server', 'faultstring': 'ip非法'}
++ {'retCode': 0, 'retInfo': ok}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_45' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_45: ip只有1位</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_45' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_45'>失败</button>
+    <div id='div_ft1_45' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_45' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_45'>失败</button>
+    <div id='div_ft1_45' class="collapse in" align="left">
+    <pre>
+    
+ft1_45: 请求参数--&gt; {'client_ip':'2', 'tmpl_id':'1', 'mobile':'13374921930'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': 'ip非法'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 90, in test_send_m_code
+    self.assertEqual(case.expected_data, str(response))
+AssertionError: "{'faultcode': 'soap:Server', 'faultstring': 'ip非法'}" != "{'retCode': 0, 'retInfo': ok}"
+- {'faultcode': 'soap:Server', 'faultstring': 'ip非法'}
++ {'retCode': 0, 'retInfo': ok}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_46' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_46: ip超过最大地址</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_46' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_46'>失败</button>
+    <div id='div_ft1_46' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_46' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_46'>失败</button>
+    <div id='div_ft1_46' class="collapse in" align="left">
+    <pre>
+    
+ft1_46: 请求参数--&gt; {'client_ip':'300.59.500.1000', 'tmpl_id':1, 'mobile':'13384405346'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': 'ip非法'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 90, in test_send_m_code
+    self.assertEqual(case.expected_data, str(response))
+AssertionError: "{'faultcode': 'soap:Server', 'faultstring': 'ip非法'}" != "{'retCode': 0, 'retInfo': ok}"
+- {'faultcode': 'soap:Server', 'faultstring': 'ip非法'}
++ {'retCode': 0, 'retInfo': ok}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_47' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_47: tmpl_id为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_47' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_47'>失败</button>
+    <div id='div_ft1_47' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_47' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_47'>失败</button>
+    <div id='div_ft1_47' class="collapse in" align="left">
+    <pre>
+    
+ft1_47: &lt;suds.sax.document.Document object at 0x00000120D3563C18&gt;
+请求参数--&gt; {'client_ip':'33.210.117.18', 'tmpl_id':'', 'mobile':'13376634742'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}
+服务器响应数据--&gt; {'faultcode': 'soap:Client', 'faultstring': 'Unmarshalling Error: For input string: "" '}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 90, in test_send_m_code
+    self.assertEqual(case.expected_data, str(response))
+AssertionError: "{'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}" != '{\'faultcode\': \'soap:Client\', \'fault[53 chars] \'}'
+- {'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}
++ {'faultcode': 'soap:Client', 'faultstring': 'Unmarshalling Error: For input string: "" '}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_48' class='none'>
+    <td class='failCase'><div class='testcase'>test_send_m_code_48: tmpl_id为数字</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_48' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_48'>失败</button>
+    <div id='div_ft1_48' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_48' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_48'>失败</button>
+    <div id='div_ft1_48' class="collapse in" align="left">
+    <pre>
+    
+ft1_48: 请求参数--&gt; {'client_ip':'174.192.46.116', 'tmpl_id':1, 'mobile':'13370983070'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+Traceback (most recent call last):
+  File "C:\Users\keen\PycharmProjects\api_webservice\library\ddt.py", line 145, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 96, in test_send_m_code
+    raise e
+  File "C:\Users\keen\PycharmProjects\api_webservice\testcases\test_sendMCode.py", line 90, in test_send_m_code
+    self.assertEqual(case.expected_data, str(response))
+AssertionError: "{'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}" != "{'retCode': 0, 'retInfo': ok}"
+- {'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}
++ {'retCode': 0, 'retInfo': ok}
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_49' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_49: tmpl_id为非1（2）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_49' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_49'>通过</button>
+    <div id='div_pt1_49' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_49' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_49'>通过</button>
+    <div id='div_pt1_49' class="collapse in" align="left">
+    <pre>
+    
+pt1_49: &lt;suds.sax.document.Document object at 0x00000120D3B131D0&gt;
+请求参数--&gt; {'client_ip':'165.164.28.216', 'tmpl_id':'2', 'mobile':'13394305114'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '短信模板配置错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_50' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_50: tmpl_id为非1（0）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_50' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_50'>通过</button>
+    <div id='div_pt1_50' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_50' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_50'>通过</button>
+    <div id='div_pt1_50' class="collapse in" align="left">
+    <pre>
+    
+pt1_50: &lt;suds.sax.document.Document object at 0x00000120D3858400&gt;
+请求参数--&gt; {'client_ip':'15.48.38.62', 'tmpl_id':'0', 'mobile':'13310242520'}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': '短信模板不存在'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '短信模板不存在'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_51' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_51: 手机号为数字</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_51' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_51'>通过</button>
+    <div id='div_pt1_51' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_51' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_51'>通过</button>
+    <div id='div_pt1_51' class="collapse in" align="left">
+    <pre>
+    
+pt1_51: 请求参数--&gt; {'client_ip':'62.50.95.152', 'tmpl_id':'1', 'mobile':'13366486847'}
+期望结果---&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_52' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_52: 10位手机号</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_52' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_52'>通过</button>
+    <div id='div_pt1_52' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_52' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_52'>通过</button>
+    <div id='div_pt1_52' class="collapse in" align="left">
+    <pre>
+    
+pt1_52: &lt;suds.sax.document.Document object at 0x00000120D391A0F0&gt;
+请求参数--&gt; {'client_ip':'130.58.118.66', 'tmpl_id':'1', 'mobile':1557328489}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt1_53' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_send_m_code_53: 12位手机号</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt1_53' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt1_53'>通过</button>
+    <div id='div_pt1_53' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt1_53' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt1_53'>通过</button>
+    <div id='div_pt1_53' class="collapse in" align="left">
+    <pre>
+    
+pt1_53: &lt;suds.sax.document.Document object at 0x00000120D3336F60&gt;
+请求参数--&gt; {'client_ip':'195.58.32.111', 'tmpl_id':'1', 'mobile':155732848911}
+期望结果---&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+服务器响应数据--&gt; {'faultcode': 'soap:Server', 'faultstring': '手机号码错误'}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_userRegister.UserRegisterTestCase</td>
+    <td class="text-center">40</td>
+    <td class="text-center">40</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',40)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_01: 正常注册（手机号段130）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_1'>通过</button>
+    <div id='div_pt2_1' class="collapse in" align="left">
+    <pre>
+    
+pt2_1: 请求参数--&gt; {"verify_code":"163324", "user_id":"ucp6zW","channel_id":"1","pwd":"123456", 'mobile':'13034198819',"ip":"51.154.84.162"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_02: 正常注册（手机号段131）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_2'>通过</button>
+    <div id='div_pt2_2' class="collapse in" align="left">
+    <pre>
+    
+pt2_2: 请求参数--&gt; {"verify_code":"765654", "user_id":"mQnqmY","channel_id":"1","pwd":"123456", 'mobile':'13148005839',"ip":"8.210.137.242"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_03: 正常注册（手机号段132）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_3'>通过</button>
+    <div id='div_pt2_3' class="collapse in" align="left">
+    <pre>
+    
+pt2_3: 请求参数--&gt; {"verify_code":"434188", "user_id":"gqs8vB","channel_id":"1","pwd":"123456", 'mobile':'13255533756',"ip":"47.19.107.92"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_04: 正常注册（手机号段133）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_4'>通过</button>
+    <div id='div_pt2_4' class="collapse in" align="left">
+    <pre>
+    
+pt2_4: 请求参数--&gt; {"verify_code":"733708", "user_id":"RIWtm1","channel_id":"1","pwd":"123456", 'mobile':'13308288008',"ip":"137.64.84.30"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_05: 正常注册（手机号段134）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_5'>通过</button>
+    <div id='div_pt2_5' class="collapse in" align="left">
+    <pre>
+    
+pt2_5: 请求参数--&gt; {"verify_code":"811081", "user_id":"z1Yajv","channel_id":"1","pwd":"123456", 'mobile':'13483097223',"ip":"69.136.60.215"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_06: 正常注册（手机号段135）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_6'>通过</button>
+    <div id='div_pt2_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_6'>通过</button>
+    <div id='div_pt2_6' class="collapse in" align="left">
+    <pre>
+    
+pt2_6: 请求参数--&gt; {"verify_code":"841573", "user_id":"Yv95ip","channel_id":"1","pwd":"123456", 'mobile':'13513102680',"ip":"208.240.165.87"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_07: 正常注册（手机号段136）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_7'>通过</button>
+    <div id='div_pt2_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_7'>通过</button>
+    <div id='div_pt2_7' class="collapse in" align="left">
+    <pre>
+    
+pt2_7: 请求参数--&gt; {"verify_code":"432990", "user_id":"ysyzm5","channel_id":"1","pwd":"123456", 'mobile':'13683709920',"ip":"190.121.238.18"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_08: 正常注册（手机号段137）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_8'>通过</button>
+    <div id='div_pt2_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_8'>通过</button>
+    <div id='div_pt2_8' class="collapse in" align="left">
+    <pre>
+    
+pt2_8: 请求参数--&gt; {"verify_code":"509070", "user_id":"5BjrkM","channel_id":"1","pwd":"123456", 'mobile':'13712589124',"ip":"76.95.90.13"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_09: 正常注册（手机号段138）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_9'>通过</button>
+    <div id='div_pt2_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_9'>通过</button>
+    <div id='div_pt2_9' class="collapse in" align="left">
+    <pre>
+    
+pt2_9: 请求参数--&gt; {"verify_code":"827378", "user_id":"fVYe7J","channel_id":"1","pwd":"123456", 'mobile':'13822310437',"ip":"188.58.140.126"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_10: 正常注册（手机号段139）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_10'>通过</button>
+    <div id='div_pt2_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_10'>通过</button>
+    <div id='div_pt2_10' class="collapse in" align="left">
+    <pre>
+    
+pt2_10: 请求参数--&gt; {"verify_code":"585313", "user_id":"JxUEkB","channel_id":"1","pwd":"123456", 'mobile':'13900565831',"ip":"166.65.145.45"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_11: 正常注册（手机号段145）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_11'>通过</button>
+    <div id='div_pt2_11' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_11'>通过</button>
+    <div id='div_pt2_11' class="collapse in" align="left">
+    <pre>
+    
+pt2_11: 请求参数--&gt; {"verify_code":"053133", "user_id":"29v1qR","channel_id":"1","pwd":"123456", 'mobile':'14565999175',"ip":"161.33.114.84"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_12: 正常注册（手机号段147）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_12'>通过</button>
+    <div id='div_pt2_12' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_12'>通过</button>
+    <div id='div_pt2_12' class="collapse in" align="left">
+    <pre>
+    
+pt2_12: 请求参数--&gt; {"verify_code":"209535", "user_id":"Za80tB","channel_id":"1","pwd":"123456", 'mobile':'14747743273',"ip":"3.173.80.10"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_13: 正常注册（手机号段150）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_13'>通过</button>
+    <div id='div_pt2_13' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_13'>通过</button>
+    <div id='div_pt2_13' class="collapse in" align="left">
+    <pre>
+    
+pt2_13: 请求参数--&gt; {"verify_code":"178522", "user_id":"WTiit8","channel_id":"1","pwd":"123456", 'mobile':'15019646565',"ip":"171.141.208.208"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_14: 正常注册（手机号段151）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_14' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_14'>通过</button>
+    <div id='div_pt2_14' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_14' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_14'>通过</button>
+    <div id='div_pt2_14' class="collapse in" align="left">
+    <pre>
+    
+pt2_14: 请求参数--&gt; {"verify_code":"174705", "user_id":"m59SDg","channel_id":"1","pwd":"123456", 'mobile':'15120987395',"ip":"122.211.109.76"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_15: 正常注册（手机号段152）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_15' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_15'>通过</button>
+    <div id='div_pt2_15' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_15' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_15'>通过</button>
+    <div id='div_pt2_15' class="collapse in" align="left">
+    <pre>
+    
+pt2_15: 请求参数--&gt; {"verify_code":"958281", "user_id":"uvMHBK","channel_id":"1","pwd":"123456", 'mobile':'15219424470',"ip":"74.212.110.199"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_16: 正常注册（手机号段153）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_16'>通过</button>
+    <div id='div_pt2_16' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_16'>通过</button>
+    <div id='div_pt2_16' class="collapse in" align="left">
+    <pre>
+    
+pt2_16: 请求参数--&gt; {"verify_code":"230548", "user_id":"5XIgxp","channel_id":"1","pwd":"123456", 'mobile':'15330400392',"ip":"76.148.216.55"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_17: 正常注册（手机号段155）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_17' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_17'>通过</button>
+    <div id='div_pt2_17' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_17' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_17'>通过</button>
+    <div id='div_pt2_17' class="collapse in" align="left">
+    <pre>
+    
+pt2_17: 请求参数--&gt; {"verify_code":"145726", "user_id":"RzeBdq","channel_id":"1","pwd":"123456", 'mobile':'15565449398',"ip":"35.202.164.24"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_18: 正常注册（手机号段156）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_18' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_18'>通过</button>
+    <div id='div_pt2_18' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_18' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_18'>通过</button>
+    <div id='div_pt2_18' class="collapse in" align="left">
+    <pre>
+    
+pt2_18: 请求参数--&gt; {"verify_code":"106577", "user_id":"2d32Xc","channel_id":"1","pwd":"123456", 'mobile':'15696630504',"ip":"115.18.94.2"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_19: 正常注册（手机号段157）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_19' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_19'>通过</button>
+    <div id='div_pt2_19' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_19' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_19'>通过</button>
+    <div id='div_pt2_19' class="collapse in" align="left">
+    <pre>
+    
+pt2_19: 请求参数--&gt; {"verify_code":"469436", "user_id":"6x7LK9","channel_id":"1","pwd":"123456", 'mobile':'15740001088',"ip":"111.48.65.216"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_20: 正常注册（手机号段158）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_20' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_20'>通过</button>
+    <div id='div_pt2_20' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_20' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_20'>通过</button>
+    <div id='div_pt2_20' class="collapse in" align="left">
+    <pre>
+    
+pt2_20: 请求参数--&gt; {"verify_code":"355687", "user_id":"Qb58R0","channel_id":"1","pwd":"123456", 'mobile':'15892721475',"ip":"150.251.79.171"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_21: 正常注册（手机号段159）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_21' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_21'>通过</button>
+    <div id='div_pt2_21' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_21' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_21'>通过</button>
+    <div id='div_pt2_21' class="collapse in" align="left">
+    <pre>
+    
+pt2_21: 请求参数--&gt; {"verify_code":"005642", "user_id":"GI6VHP","channel_id":"1","pwd":"123456", 'mobile':'15981260831',"ip":"213.192.226.138"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_22: 正常注册（手机号段170）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_22' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_22'>通过</button>
+    <div id='div_pt2_22' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_22' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_22'>通过</button>
+    <div id='div_pt2_22' class="collapse in" align="left">
+    <pre>
+    
+pt2_22: 请求参数--&gt; {"verify_code":"909473", "user_id":"IDZfwq","channel_id":"1","pwd":"123456", 'mobile':'17068097011',"ip":"245.56.51.196"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_23: 正常注册（手机号段176）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_23' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_23'>通过</button>
+    <div id='div_pt2_23' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_23' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_23'>通过</button>
+    <div id='div_pt2_23' class="collapse in" align="left">
+    <pre>
+    
+pt2_23: 请求参数--&gt; {"verify_code":"837850", "user_id":"76206E","channel_id":"1","pwd":"123456", 'mobile':'17664504303',"ip":"138.178.173.156"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_24: 正常注册（手机号段177）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_24' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_24'>通过</button>
+    <div id='div_pt2_24' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_24' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_24'>通过</button>
+    <div id='div_pt2_24' class="collapse in" align="left">
+    <pre>
+    
+pt2_24: 请求参数--&gt; {"verify_code":"531529", "user_id":"z86Gqt","channel_id":"1","pwd":"123456", 'mobile':'17767071942',"ip":"42.117.126.220"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_25: 正常注册（手机号段178）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_25' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_25'>通过</button>
+    <div id='div_pt2_25' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_25' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_25'>通过</button>
+    <div id='div_pt2_25' class="collapse in" align="left">
+    <pre>
+    
+pt2_25: 请求参数--&gt; {"verify_code":"664213", "user_id":"OPycPl","channel_id":"1","pwd":"123456", 'mobile':'17881216969',"ip":"150.50.90.89"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_26: 正常注册（手机号段180）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_26' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_26'>通过</button>
+    <div id='div_pt2_26' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_26' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_26'>通过</button>
+    <div id='div_pt2_26' class="collapse in" align="left">
+    <pre>
+    
+pt2_26: 请求参数--&gt; {"verify_code":"658790", "user_id":"40500M","channel_id":"1","pwd":"123456", 'mobile':'18068377824',"ip":"55.35.166.17"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_27: 正常注册（手机号段181）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_27' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_27'>通过</button>
+    <div id='div_pt2_27' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_27' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_27'>通过</button>
+    <div id='div_pt2_27' class="collapse in" align="left">
+    <pre>
+    
+pt2_27: 请求参数--&gt; {"verify_code":"330742", "user_id":"19U4xe","channel_id":"1","pwd":"123456", 'mobile':'18175080538',"ip":"58.99.64.18"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_28: 正常注册（手机号段182）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_28' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_28'>通过</button>
+    <div id='div_pt2_28' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_28' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_28'>通过</button>
+    <div id='div_pt2_28' class="collapse in" align="left">
+    <pre>
+    
+pt2_28: 请求参数--&gt; {"verify_code":"574325", "user_id":"8PtgXD","channel_id":"1","pwd":"123456", 'mobile':'18297171152',"ip":"108.110.32.253"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_29: 正常注册（手机号段183）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_29' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_29'>通过</button>
+    <div id='div_pt2_29' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_29' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_29'>通过</button>
+    <div id='div_pt2_29' class="collapse in" align="left">
+    <pre>
+    
+pt2_29: 请求参数--&gt; {"verify_code":"976888", "user_id":"d8H77l","channel_id":"1","pwd":"123456", 'mobile':'18398694788',"ip":"92.168.236.190"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_30: 正常注册（手机号段184）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_30' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_30'>通过</button>
+    <div id='div_pt2_30' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_30' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_30'>通过</button>
+    <div id='div_pt2_30' class="collapse in" align="left">
+    <pre>
+    
+pt2_30: 请求参数--&gt; {"verify_code":"325343", "user_id":"hQ719W","channel_id":"1","pwd":"123456", 'mobile':'18411718146',"ip":"233.135.51.107"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_31: 正常注册（手机号段185）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_31' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_31'>通过</button>
+    <div id='div_pt2_31' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_31' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_31'>通过</button>
+    <div id='div_pt2_31' class="collapse in" align="left">
+    <pre>
+    
+pt2_31: 请求参数--&gt; {"verify_code":"663448", "user_id":"OBynBH","channel_id":"1","pwd":"123456", 'mobile':'18527101009',"ip":"140.62.205.60"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_32: 正常注册（手机号段186）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_32' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_32'>通过</button>
+    <div id='div_pt2_32' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_32' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_32'>通过</button>
+    <div id='div_pt2_32' class="collapse in" align="left">
+    <pre>
+    
+pt2_32: 请求参数--&gt; {"verify_code":"670771", "user_id":"A6598a","channel_id":"1","pwd":"123456", 'mobile':'18698945662',"ip":"140.241.114.134"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_33: 正常注册（手机号段187）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_33' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_33'>通过</button>
+    <div id='div_pt2_33' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_33' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_33'>通过</button>
+    <div id='div_pt2_33' class="collapse in" align="left">
+    <pre>
+    
+pt2_33: 请求参数--&gt; {"verify_code":"738636", "user_id":"ypXnfQ","channel_id":"2","pwd":"123456", 'mobile':'18762182123',"ip":"26.147.120.91"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_34: 正常注册（手机号段188）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_34' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_34'>通过</button>
+    <div id='div_pt2_34' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_34' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_34'>通过</button>
+    <div id='div_pt2_34' class="collapse in" align="left">
+    <pre>
+    
+pt2_34: 请求参数--&gt; {"verify_code":"213853", "user_id":"x07MAl","channel_id":"3","pwd":"123456", 'mobile':'18886963203',"ip":"210.41.241.211"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_35: 正常注册（手机号段189）</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_35' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_35'>通过</button>
+    <div id='div_pt2_35' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_35' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_35'>通过</button>
+    <div id='div_pt2_35' class="collapse in" align="left">
+    <pre>
+    
+pt2_35: 请求参数--&gt; {"verify_code":"322686", "user_id":"4P272h","channel_id":"1","pwd":"123456", 'mobile':'18920323520',"ip":"47.223.163.146"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_36: 验证码错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_36' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_36'>通过</button>
+    <div id='div_pt2_36' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_36' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_36'>通过</button>
+    <div id='div_pt2_36' class="collapse in" align="left">
+    <pre>
+    
+pt2_36: 请求参数--&gt; {"verify_code":"111111", "user_id":"iza54e","channel_id":"3","pwd":"123456","mobile":"13055240808","ip":"81.22.240.227"}
+期望结果--&gt; {'retCode': '30010008', 'retInfo': '验证码错误'}
+服务器响应数据--&gt; {'retCode': 30010008, 'retInfo': 验证码错误}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_37' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_37: 验证码5位数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_37' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_37'>通过</button>
+    <div id='div_pt2_37' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_37' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_37'>通过</button>
+    <div id='div_pt2_37' class="collapse in" align="left">
+    <pre>
+    
+pt2_37: 请求参数--&gt; {"verify_code":"11356", "user_id":"0z16Ht","channel_id":"3","pwd":"123456","mobile":"13172656332","ip":"239.63.214.134"}
+期望结果--&gt; {'retCode': '30010008', 'retInfo': '验证码错误'}
+服务器响应数据--&gt; {'retCode': 30010008, 'retInfo': 验证码错误}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_38' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_38: 验证码7位数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_38' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_38'>通过</button>
+    <div id='div_pt2_38' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_38' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_38'>通过</button>
+    <div id='div_pt2_38' class="collapse in" align="left">
+    <pre>
+    
+pt2_38: 请求参数--&gt; {"verify_code":"7376898", "user_id":"he9C35","channel_id":"3","pwd":"123456","mobile":"13270343263","ip":"22.146.179.129"}
+期望结果--&gt; {'retCode': '30010008', 'retInfo': '验证码错误'}
+服务器响应数据--&gt; {'retCode': 30010008, 'retInfo': 验证码错误}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_39' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_39: 验证码包含字母</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_39' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_39'>通过</button>
+    <div id='div_pt2_39' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_39' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_39'>通过</button>
+    <div id='div_pt2_39' class="collapse in" align="left">
+    <pre>
+    
+pt2_39: 请求参数--&gt; {"verify_code":"a34265", "user_id":"jYX5KH","channel_id":"3","pwd":"123456","mobile":"13380693431","ip":"98.95.46.137"}
+期望结果--&gt; {'retCode': '30010008', 'retInfo': '验证码错误'}
+服务器响应数据--&gt; {'retCode': 30010008, 'retInfo': 验证码错误}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt2_40' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_user_register_40: 用户名为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt2_40' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt2_40'>通过</button>
+    <div id='div_pt2_40' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt2_40' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt2_40'>通过</button>
+    <div id='div_pt2_40' class="collapse in" align="left">
+    <pre>
+    
+pt2_40: 请求参数--&gt; {"verify_code":"381362", "user_id":"0q8RpJ","channel_id":"3","pwd":"123456","mobile":"13532743532","ip":"244.181.27.198"}
+期望结果--&gt; {'retCode': '0', 'retInfo': 'ok'}
+服务器响应数据--&gt; {'retCode': 0, 'retInfo': ok}
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>93</td>
+    <td>80</td>
+    <td>13</td>
+    <td>0</td>
+    <td>通过率：86.02%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>

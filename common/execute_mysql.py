@@ -26,7 +26,6 @@ class ExecuteMysql(object):
             port=conf.getint("mysql", "port"),
             user=conf.get("mysql", 'user'),
             password=conf.get("mysql", "password"),
-            database=conf.get("mysql", "database"),
             charset="utf8")
         # 创建游标
         self.cur = self.con.cursor()
