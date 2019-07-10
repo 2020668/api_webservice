@@ -29,5 +29,24 @@ class ReadConfig(configparser.ConfigParser):
         elif version == "produce":
             self.read(os.path.join(CONF_DIR, 'config_produce.ini'), encoding='utf8')
 
+    def write_data(self, option, select, value):
+        """
+        :param option:
+        :param select:
+        :param data: 写入的数据，str
+        :return:
+        """
+        self.set(option, select, value)
+        with open(os.path.join(CONF_DIR, 'config_test.ini'), 'w') as f:     # 在config_test.ini中写入数据
+            self.write(f)
+
 
 conf = ReadConfig()
+
+if __name__ == '__main__':
+    r = ReadConfig()
+    b = r.get('mysql', 'password')
+    print(b)
+    r.write_data('mysql', 'password', 'python999')
+    b = r.get('mysql', 'password')
+    print(b)
