@@ -14,7 +14,7 @@ E-mail:keen2020@outlook.com
 
 import configparser
 import os
-from common.constant import CONF_DIR
+from custom.constant import CONF_DIR
 
 
 class ReadConfig(configparser.ConfigParser):

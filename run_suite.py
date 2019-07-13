@@ -14,9 +14,9 @@ E-mail:keen2020@outlook.com
 
 import unittest
 from library.HTMLTestRunnerNew import HTMLTestRunner
-from common.config import conf
-from common.constant import CASE_DIR, REPORT_DIR
-from common.send_email import SendEmail
+from custom.config import conf
+from custom.constant import CASE_DIR, REPORT_DIR
+from custom.send_email import SendEmail
 import os
 import time
 

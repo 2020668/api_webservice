@@ -13,9 +13,9 @@ E-mail:keen2020@outlook.com
 """
 
 import logging
-from common.config import conf
+from custom.config import conf
 import os
-from common.constant import LOG_DIR
+from custom.constant import LOG_DIR
 
 
 # 从配置文件中获取相关数据

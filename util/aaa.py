@@ -1,6 +1,6 @@
 
 # # from suds import client
-# from common import client
+# from custom import client
 #
 # url = 'http://120.24.235.105:9010/sms-service-war-1.0/ws/smsFacade.ws?wsdl'
 #
@@ -17,7 +17,7 @@
 # print(dict(res))
 
 
-# from common import client
+# from custom import client
 #
 # # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
 # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
@@ -49,7 +49,7 @@
 #         ret += s
 #     return ret
 
-# from common import client
+# from custom import client
 #
 # # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
 # url = 'http://120.24.235.105:9010/finance-user_info-war-1.0/ws/financeUserInfoFacade.ws?wsdl'
@@ -79,8 +79,8 @@
 # 获取指定字符串后的字符，如：phone后面的130
 
 
-from common.web_request import WebRequests
-from common.execute_mysql import ExecuteMysql
+from custom.web_request import WebRequests
+from custom.execute_mysql import ExecuteMysql
 
 
 def m_code(ip, mobile):

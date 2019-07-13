@@ -13,7 +13,7 @@ E-mail:keen2020@outlook.com
 """
 
 # # from suds import client
-# from common import client
+# from custom import client
 #
 # url = 'http://120.24.235.105:9010/sms-service-war-1.0/ws/smsFacade.ws?wsdl'
 #
@@ -33,15 +33,14 @@ E-mail:keen2020@outlook.com
 
 import unittest
 from library.ddt import ddt, data
-from common.read_excel import ReadExcel
-from common.logger import my_log   # 可直接导入对象
-from common.config import conf
+from custom.read_excel import ReadExcel
+from custom.logger import my_log   # 可直接导入对象
+from custom.config import conf
 import os
-from common.constant import DATA_DIR
-from common.http_request import HTTPRequest2
-from common.execute_mysql import ExecuteMysql
-from common.tools import data_replace, v_code
-from common import client
+from custom.constant import DATA_DIR
+from custom.http_request import HTTPRequest2
+from custom.execute_mysql import ExecuteMysql
+from custom.web_request import WebRequests
 
 
 # 从配置文件获取数据
@@ -71,29 +70,31 @@ class VerifyUserAuthTestCase(unittest.TestCase):
         # 拼接url地址
         url = conf.get("env", "url") + case.url
         self.row = case.case_id + 1
-        web_service = client.Client(url=url)
-        data = eval(case.request_data)
-        res = web_service.service.verifyUserAuth(data)
-        result = dict(res)
+        ws = WebRequests()
+        response = ws.web_request(url=url, interface='verifyUserAuth', data=case.request_data)
         # 成功服务器响应数据{'retCode': 0, 'retInfo': ok}，需将ok --> 'ok'
-        if 'retCode' in str(result):
-            result = {'retCode': result['retCode'], 'retInfo': str(result['retInfo'])}
+        if 'retCode' in str(response):
+            result = {'retCode': response['retCode'], 'retInfo': str(response['retInfo'])}
         # 由于测试失败返回的数据特殊{'faultcode': soap:Server, 'faultstring': 手机号码错误}，只能转换为str再来断言
         else:
-            result = str(result)
+            result = str(response)
 
         # 该打印的内容会显示在报告中
         print("请求数据--> {}".format(case.request_data))
-        print("期望结果---> {}".format(case.expected_data))
-        print("服务器响应数据--> {}".format(result))
-        print("服务器响应数据类型：{}".format(type(result)))
+        my_log.info("请求数据--> {}".format(case.request_data))
+
+        print("期望结果--> {}".format(case.expected_data))
+        my_log.info("期望结果--> {}".format(case.expected_data))
+
+        print("服务器响应数据--> {}".format(response))
+        my_log.info("服务器响应数据--> {}".format(response))
 
         try:
             # if 'retCode' in case.expected_data:
             #     self.assertEqual(eval(case.expected_data), result)
             # else:
             #     self.assertEqual(case.expected_data, str(result))
-            self.assertEqual(eval(case.expected_data), result)
+            self.assertEqual(eval(case.expected_data), response)
 
         except AssertionError as e:
             result = 'FAIL'
@@ -101,10 +102,11 @@ class VerifyUserAuthTestCase(unittest.TestCase):
             raise e
         else:
             result = 'PASS'
-            my_log.debug("预期结果：%s, 实际结果：%s, 测试通过" % (case.expected_data, str(result)))
+            my_log.debug("断言结果:{}, 测试通过".format(result))
 
         finally:
-            self.wb.write_data(row=self.row, column=8, msg=result)
+            self.wb.write_data(row=self.row, column=8, msg=str(response))
+            self.wb.write_data(row=self.row, column=9, msg=result)
 
     @classmethod
     def tearDownClass(cls):

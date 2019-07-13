@@ -13,7 +13,7 @@ E-mail:keen2020@outlook.com
 """
 
 import pymysql
-from common.config import conf
+from custom.config import conf
 
 
 class ExecuteMysql(object):

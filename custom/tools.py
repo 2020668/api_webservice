@@ -13,7 +13,7 @@ E-mail:keen2020@outlook.com
 """
 
 import re
-from common.config import conf
+from custom.config import conf
 import random
 
 # 匹配任意字符，至少一次，关闭贪婪

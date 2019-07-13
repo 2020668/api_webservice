@@ -15,15 +15,15 @@ E-mail:keen2020@outlook.com
 
 import unittest
 from library.ddt import ddt, data
-from common.read_excel import ReadExcel
-from common.logger import my_log   # 可直接导入对象
-from common.config import conf
+from custom.read_excel import ReadExcel
+from custom.logger import my_log   # 可直接导入对象
+from custom.config import conf
 import os
-from common.constant import DATA_DIR
-from common.http_request import HTTPRequest2
-from common.execute_mysql import ExecuteMysql
-from common.tools import data_replace
-from common import client
+from custom.constant import DATA_DIR
+from custom.http_request import HTTPRequest2
+from custom.execute_mysql import ExecuteMysql
+from custom.tools import data_replace
+from custom import client
 
 
 # 从配置文件获取数据

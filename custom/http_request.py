@@ -14,7 +14,7 @@ E-mail:keen2020@outlook.com
 
 import requests
 from requests.sessions import Session
-from common.logger import my_log
+from custom.logger import my_log
 
 """
 封装requests类，根据用例中的请求方法，来决定发起什么类型的请求。输出logging日志
