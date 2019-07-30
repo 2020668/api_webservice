@@ -151,14 +151,14 @@ class ReadExcel(object):
 
         titles = []
         for title in rows_data[0]:
-            if title.value is not None:
+            if title.value:
                 titles.append(title.value)
 
         for case in rows_data[1:]:
             data = []
             for cell in case:
                 data.append(cell.value)
-            case_data= zip(titles, data)
+            case_data = zip(titles, data)
             case_obj = Case(case_data)
             cases.append(case_obj)
 
@@ -183,7 +183,7 @@ class ReadExcel(object):
             else:
                 for column in read_column:
                     title = self.sheet.cell(row, column).value
-                    if title is not None:
+                    if title:
                         titles.append(title)
 
         self.close()

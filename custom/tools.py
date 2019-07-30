@@ -48,7 +48,7 @@ def data_replace(data):
             # value = getattr(ConText, "loanid")
             if "loanid" in data:
                 value = getattr(ConText, "loanid")
-            if "phone1" in data:
+            elif "phone1" in data:
                 value = rand_phone(eval(data)["mobile"][6:9])   # 获取phone后面的手机号段
         data = re.sub(p, value, data, count=1)
     return data
@@ -67,7 +67,8 @@ def rand_name():
 
 
 def rand_ip():
-    ip = '{}.{}.{}.{}'.format(random.randint(0, 255),random.randint(0, 255),random.randint(0, 255),random.randint(0, 255))
+    ip = '{}.{}.{}.{}'.format(random.randint(0, 255), random.randint(0, 255),
+                              random.randint(0, 255), random.randint(0, 255))
     return ip
 
 
@@ -91,4 +92,6 @@ if __name__ == '__main__':
     # print(v_code())
     d = "{'client_ip':'$ip', 'tmpl_id':'1', 'mobile':'#phone147#'}"
     data = data_replace(d)
+    data = data.replace("$ip", rand_ip())
     print(data)
+    print(rand_name())
