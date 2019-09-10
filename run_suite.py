@@ -48,4 +48,4 @@ with open(file_path, 'wb') as f:
 mail_title = "webservice接口测试报告"
 mail_message = "webservice接口测试报告，请各位领导注意查收，谢谢!"
 # send_qq_file_mail(mail_title, mail_message, file_path)
-SendEmail.send_outlook_file_mail(mail_title, mail_message, file_path)
+# SendEmail.send_outlook_file_mail(mail_title, mail_message, file_path)
